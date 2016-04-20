@@ -12,10 +12,13 @@ Bitte führt jedes mal, wenn ihr irgendwie `git pull` macht auch eben die `getpa
 * Absätze nicht mit doppelter Leerzeile, sondern mit `\n` (= neue Zeile mit 5pt extra Platz)
 * Alles mathamtische als Code, auch `|H|` oder so (wegen `fontenc`)
 
-## Makros
-Es sind zwei Makros hier enthalten: `dadp` (Das AD Package) und `gail` (Grundgerüst für Abgaben in LaTeX).
+## Packages/Makros
+Es sind zwei Packages hier enthalten: `dadp` (Das AD Package) und `gail` (Grundgerüst für Abgaben in LaTeX).
+
+Die beiden Packages stammen aus https://github.com/hauke96/LaTeX.
 
 ### dadp
+Ist eher eine Makro-Sammlung
 * Viele Probleme als Makro definiert, z.B. `\sat`, `ţhreesat`, `\hitset`
 * Komplexitätsklassen definiert per `\p`, `\np`, `\npc`
 * Landaunotation (nur "groß O") durch `Ovon{x}` gegeben
@@ -24,5 +27,7 @@ Es sind zwei Makros hier enthalten: `dadp` (Das AD Package) und `gail` (Grundger
 Dieses package definiert das Layout des Blattes mit Header und Footer, sowie dem Titelblatt.
 
 Im Headerbereich kann man die Autoren, Daten, etc. für das `\maketitle` definieren. Durch die Nummer des Blattes wird auch z.B. das Abgabedatum berechnet (das Intervall der Abgaben muss dafür natürlich passend gesetzt werden).
+
+Stimmt etwas mit den Daten nicht (z.B. den Namen eines Autors vergessen), wird das direkt rot im Dokument vermerkt (es wird keinen Compiler Error geben!).
 
 An sich ist hier alles soweit definiert, man muss nur drauf achten, dass die Blattnummer stimmt.
