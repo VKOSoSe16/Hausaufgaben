@@ -26,7 +26,31 @@ Kombinatorischen Optimierung}
 	\maketitle
 	\section{}
 		\subsection{}
-		\subsection{}
+		\subsection{Spezialfall $k=2$}
+			Beim Spezialfall für $k=2$ kann man tatsächlich einen Algorithmus angeben, dessen Laufzeit polynomiell in der Eingabe ist.
+		\alglanguage{pseudocode}
+		\begin{breakablealgorithm}
+			\caption{reserve}
+			\begin{algorithmic}[1]
+				\Procedure{reserve}{P, R, k}
+					\ForAll{p$\in$P}
+						\State R$_{rest}$ = weiseResourcenZu(p, R) // gibt alle noch nicht zugewiesenen Ressourcen zurück
+						\State P = P $-$ p
+						\ForAll{q$\in$P}
+							\State b = istVerteilungMöglich(q, R$_{rest}$)
+							\If{b == true}
+								\Return true
+							\EndIf
+						\EndFor
+					\EndFor
+					\Return false
+				\EndProcedure
+			\end{algorithmic}
+		\end{breakablealgorithm}
+		Die Laufzeit beträgt dabei $\Ovon{|P|\cdot n+|P|^2\cdot n}$, wobei $n=|R|$ ist.\n
+		Man Geht in der äußeren Schleife alle $p\in P$ durch , also $|P|$ mal. Dort verteilt man zunächst maximal $n$ viele Ressourcen, ergo $n$ viele Schritte. Nun wird $p$ aus $P$ entfernt, was mit einer schlauen Implementierung (z.B. als Liste) in konstanter Zeit machbar ist.\\
+		Danach beginnt die innere Schleife, welche alle $q\in P$ durch geht und somit $|P|-1$ mal durchläuft. Dort wird dann geprüft ob eine weitere Verteilung der restlichen Ressourcen auf $q$ möglich ist. Auch da benötigt man maximal $n$ viele Schritte.\\
+		Man erhält also eine Laufzeit von $\Ovon{|P|\cdot(n+|P|\cdot n)}$, was mit $\Ovon{|P|\cdot n+|P|^2\cdot n}$ äquivalent ist (hier erkennt man aber schön das Polynom).
 		\subsection{}
 		\subsection{}
 	\section{}
