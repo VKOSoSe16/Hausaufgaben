@@ -54,6 +54,14 @@ Kombinatorischen Optimierung}
 		\subsection{}
 		\subsection{}
 	\section{}
-		\subsection{}
+		\subsection{\threesat auf \setsplit reduzieren}
+			\subsubsection{Zeigen, dass $\setsplit\in\np$ gilt}
+			Mit einem Verfifikationsalgorithmus, welcher die Eingabe $\left\langle S_1, S_2, C \right\rangle$ bekommt, kann man in polynomieller Laufzeit prüfen, ob eine Aufteilung in Klassen (also ein set splitting), korrekt ist.\n
+			Dazu geht man zunächst jedes $c\in C$ durch und nimmt ein Element $e_1$ aus $c$.
+			Für dieses Element prüft man nun ob es ein $e_2\in c$ gibt, bei dem gilt $class(e_1)\neq class(e_2)$ (also ob $e_1$ in einer anderen Klasse ist, als $e_2$).
+			Gibt es ein solches $e_2$, ist die Aufteilung der Teilmenge $c$ schon mal gültig und verifiziert.
+			Zu prüfen sind noch die restlichen Teilmengen.\n
+			Die Laufzeit ist polynomiell, da man $|C|$ viele Teilmengen durch geht und pro Teilmenge maximal $|S|$ Elemente. Es gibt maximal $|S|$ viele Teilmengen (jede Teilmenge mit je einem Element), damit wäre die Laufzeit in $\Ovon{|S|^2}$.
+			\subsubsection{Reduktion angeben}
 		\subsection{}
 \end{document}
