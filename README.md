@@ -11,6 +11,8 @@ Bitte führt jedes mal, wenn ihr irgendwie `git pull` macht auch eben die `getpa
  * Wird nicht verwendet, da es zwar erlaubt mathamtische Formeln im Text-Modus zu schreiben, besser ist aber der Mathe-Modus, da somit konsequent die Mathe-fonts verwendet werden
 * Absätze nicht mit doppelter Leerzeile, sondern mit `\n` (= neue Zeile mit 5pt extra Platz)
 * Alles mathamtische als Code, auch `|H|` oder so (wegen `fontenc`)
+* Einrückung eigentlich egal, aber bei allem außer subsubsubsection wird eingerückt (um 1 Tab)
+* Neue Zeile nach jedem Satzende
 
 ## Packages/Makros
 Es sind zwei Packages hier enthalten: `dadp` (Das AD Package) und `gail` (Grundgerüst für Abgaben in LaTeX).
