@@ -63,5 +63,26 @@ Kombinatorischen Optimierung}
 			Zu prüfen sind noch die restlichen Teilmengen.\n
 			Die Laufzeit ist polynomiell, da man $|C|$ viele Teilmengen durch geht und pro Teilmenge maximal $|S|$ Elemente. Es gibt maximal $|S|$ viele Teilmengen (jede Teilmenge mit je einem Element), damit wäre die Laufzeit in $\Ovon{|S|^2}$.
 			\subsubsection{Reduktion angeben}
+			Gegeben sei eine Aussagenlogische Formel $A$ mit den Klauseln $K_1, K_2, \dots, K_k$ und den Literalen $x_1, x_2, \dots, x_n$, wobei jede Klausel maximal drei Literale enthält.
+			Um eine Eingabe für das \setsplit Problem zu bekommen, wandelt man $A$ wie folgt um:\n
+			Jedes Literal wird mit seinem Komplement in eine Menge geschlossen, also $\{x_1, \overline{x_i}\}$, analog wird jede Klausel in eine Menge geschlossen.
+			Dazu wird ein neues Element $F$ erzeugt und jeder bisherigen Teilmenge hinzugefügt, sodass $F$ in jeder Teilmenge vorhanden ist. $F$ wird als \texttt{false} interpretiert und ist immer in der Partition enthalten, in der alle Literale, welche zu 0 ausgewertet werden enthalten sind.\n
+			Damit ist die Reduktion fertig und man muss nur noch das Orakel von \setsplit befragen.
+			\subsubsection{Korrektheit für ''$\Rightarrow$''}
+			Behauptung: $A$ besitzt eine erfüllende Belegung, dann existiert ein \setsplit in obiger Konstruktion.\n
+			Seien $x_1^*, x_2^*, \dots, x_n^*$ die Belegungen für die Literale aus $A$, welche $A$ erfüllen.
+			Man teilt nun die Elemente der zugehörigen Mengen aus der Konstruktion so auf, dass in $S_1$ alle die jenigen Literale enthalten sind, die zu 1 und in $S_2$ die jenigen, die zu 0 ausgewertet werden.
+			Durch das neue Element $F$ gelingt es nun eine Partitionierung zu finden, da man zwei Fälle unterscheiden kann:\\
+			Entweder besitzt eine betrachtete Klausel mindestens ein zu einer 1 ausgewertetes und mindestens ein zu einer 0 ausgewertetes Literal(sodass in sowohl in $S_1$, als auch in $S_2$ ein Literal enthalten ist), oder es besitzt nur zu 1 ausgewertete Literale (nur zu 0 ausgewertete treten nicht auf, da $A$ erfüllbar ist und wir eine passende Belegung haben).
+			Für den Fall von ausschließlich zu 1 ausgewerteten Literalen gibt es das $F$, welches als zusätzliches Literal dafür sorgt, dass auch diese rein ''positive'' Klausel eine gültige Partitionierung erzeugt.\n
+			In allen Fällen ist eine gültige Partitionierung möglich.
+			\subsubsection{Korrektheit für ''$\Leftarrow$''}
+			Behauptung: Es gibt eine gültige Partitionierung, damit ist $A$ erfüllbar.\n
+			Sei $S_1, S_2$ eine gültige Partitionierung von $S$ mit der Teilmengenmenge $C$, sowie der dahinter liegenden Formel $A$, welche wiederum die Literale $x_1, x_2, \dots, x_n$ und die Klauselmenge $K$ besitzt.
+			$F$ ist in der Partition enthalten, in der alle Literale enthalten sind, die in $A$ zu 0 ausgewertet werden sollen. Es kann in dieser Partition nach Definition von \setsplit keine Teilmenge $c\in C$ liegen.
+			In der anderen Partition sind somit alle Literale enthalten, die zu 1 ausgewertet werden sollen. Wertet man nun jedes Literal aus $A$ zu 1 aus, welches in dieser Partition vorkommt, ist $A$ erfüllt.\\
+			Dies ist durch die Konstruktion der Partitionierung gegeben, die besagt, dass Komplemente von Literalen stets in der jeweils anderen Partition enthalten sind.
+			Dadurch wird garantiert, dass es keine Wiedersprüche in der Auswertung geben kann.\\
+			In dieser Partition taucht jedes Literal auf und jedes Literal wird zu 1 ausgewertet, somit ist $A$ mit dieser Belegung erfüllt.
 		\subsection{}
 \end{document}
