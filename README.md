@@ -7,11 +7,13 @@ Bitte führt jedes mal, wenn ihr irgendwie `git pull` macht auch eben die `getpa
 
 # Code-Konvention
 ## Formatting
-* Kein `fontenc`, nur `inputenc` gesetzt
- * Wird nicht verwendet, da es zwar erlaubt mathamtische Formeln im Text-Modus zu schreiben, besser ist aber der Mathe-Modus, da somit konsequent die Mathe-fonts verwendet werden
+* Kein extra `fontenc` aber `ngerman` wird verwendet, nur `inputenc` auf `utf8` gesetzt
+ * Ein `inputenc` Wird nicht verwendet, da es zwar erlaubt mathamtische Formeln im Text-Modus zu schreiben, besser ist aber der Mathe-Modus, da somit konsequent die Mathe-fonts verwendet werden
+ * Einen Vorteil beim kopieren aus PDFs war bisher auch nicht erkennbar
+* Zeilenumbrüche ganz normal über `\\` (eigentlich standard) oder `\newline` (manchmal nicht vermeidbar)
 * Absätze nicht mit doppelter Leerzeile, sondern mit `\n` (= neue Zeile mit 5pt extra Platz)
-* Alles mathamtische als Code, auch `|H|` oder so (wegen `fontenc`)
-* Einrückung eigentlich egal, aber bei allem außer subsubsubsection wird eingerückt (um 1 Tab)
+* Alles was mit Mathe zu tun hat gehört in den Mathemodus (auch `|H|` muss zu `$|H|$` werden, da kein `fontenc`)
+* Einrückung eigentlich egal, aber bei allem außer `subsubsubsection` wird eingerückt (um 1 Tab)
 * Neue Zeile nach jedem Satzende
 
 ## Packages/Makros
@@ -23,7 +25,7 @@ Die beiden Packages stammen aus https://github.com/hauke96/LaTeX.
 Ist eher eine Makro-Sammlung
 * Viele Probleme als Makro definiert, z.B. `\sat`, `ţhreesat`, `\hitset`
 * Komplexitätsklassen definiert per `\p`, `\np`, `\npc`
-* Landaunotation (nur "groß O") durch `Ovon{x}` gegeben
+* Landaunotation (nur "groß O") durch `\Ovon{x}` gegeben
 
 ### gail
 Dieses package definiert das Layout des Blattes mit Header und Footer, sowie dem Titelblatt.
