@@ -8,7 +8,7 @@
 %
 %
 %
-%                 ver.1.1
+%                 ver.1.2
 %
 %     Copyright (C) 2015 Hauke Stieler
 %
@@ -33,13 +33,17 @@
 %		key features:
 %			- use section to display e.g. 4.3
 %			  (and not subsection anymore)
+%	ver: 1.2
+%		key features:
+%			- up to four authors
+%			- more individual sectioning
+%			- more detailed error messages
 %
 %	ToDo:
 %		- make more authors possible
 %			- if possible with a list
-%		- more fancy rendering of error
-%		  messages (especially in header)
-%		- more detailes in error messages
+%		- more fancy error messages in header
+%		- use only english sentences in code/comments
 %
 %
 % // ------------//______\\------------ \\
@@ -69,14 +73,14 @@
 
 
 % << ------<<=====>>------ >>
-% Interne error-funktion
+% Internal error-function
 % << ------<<=====>>------ >>
 \newcommand{\error}[1]{\textcolor{red}{\textsc{\underline{error:} #1}}}
 
 
 
 % << ------<<=====>>------ >>
-% Variablen für Autoren etc.
+% Variables for authors etc.
 % << ------<<=====>>------ >>
 \newcommand{\firstauthorvar}{$ $}
 \newcommand{\firstauthorIDvar}{$ $}
@@ -109,28 +113,47 @@
 \newcommand{\setfourthauthorID}[1]{\renewcommand{\fourthauthorIDvar}{#1}}
 \newcommand{\setcarer}[1]{\renewcommand{\carerVar}{#1}}
 
-\newcommand{\setsheetnumber}[1]
-{
-	\renewcommand{\thesheetnumber}{#1}
-	\setcounter{section}		{0}
-	\setcounter{subsection}		{0}
-	\setcounter{subsubsection}	{0}
-	\titleformat{name=\section}					{\Large\bfseries}{}{0pt}{Aufgabe \thesheetnumber .\thesection\quad}
-	\titleformat{name=\subsection}				{\large\bfseries}{}{0pt}{Aufgabe \thesheetnumber .\thesubsection\quad}
-	\titleformat{name=\subsubsection}			{\normalfont\bfseries}{}{0pt}{Aufgabe \thesheetnumber .\thesubsection .\alph{subsubsection}\quad}
-	
-	\titleformat{name=\section,numberless}			{\Large\bfseries}{}{0pt}{}
-	\titleformat{name=\subsection,numberless}		{\large\bfseries}{}{0pt}{}
-	\titleformat{name=\subsubsection,numberless}	{\normalfont\bfseries}{}{0pt}{}
-}
+
+
+% << ------<<=====>>------ >>
+% Sectioning stuff
+% << ------<<=====>>------ >>
+\newcommand{\presectiontext}{Aufgabe\;}
+\newcommand{\setpresectiontext}[1]{\renewcommand{\presectiontext}{#1\;}}
+\newcommand{\setsheetnumber}[1]{\renewcommand{\thesheetnumber}{#1}}
 \newcommand{\settitle}[1]{\renewcommand{\thetitle}{\huge #1}}
 \newcommand{\setstartdate}[3]{\setdatenumber{#1}{#2}{#3}}
 \newcommand{\setdatefreq}[1]{\renewcommand{\datefreq}{#1}}
 
+\newcommand{\setsectionstyletasks}
+{
+	\titleformat{name=\section}					{\Large\bfseries}{}{0pt}{\presectiontext\thesheetnumber .\thesection\quad}
+	\titleformat{name=\subsection}				{\large\bfseries}{}{0pt}{Aufgabe \thesheetnumber .\thesubsection\quad}
+	\titleformat{name=\subsubsection}			{\normalfont\bfseries}{}{0pt}{Aufgabe \thesheetnumber .\thesubsubsection\quad}
+}
+\newcommand{\setsectionstyletasksalphnum}
+{
+	\titleformat{name=\section}					{\Large\bfseries}{}{0pt}{\presectiontext\thesheetnumber .\thesection\quad}
+	\titleformat{name=\subsection}				{\large\bfseries}{}{0pt}{Aufgabe \thesheetnumber .\thesubsection\quad}
+	\titleformat{name=\subsubsection}			{\normalfont\bfseries}{}{0pt}{\alph{subsubsection})\quad}
+}
+\newcommand{\setsectionstylealphnum}
+{
+	\titleformat{name=\section}					{\Large\bfseries}{}{0pt}{\thesheetnumber .\thesection\quad}
+	\titleformat{name=\subsection}				{\large\bfseries}{}{0pt}{\thesheetnumber .\thesubsection\quad}
+	\titleformat{name=\subsubsection}			{\normalfont\bfseries}{}{0pt}{\alph{subsubsection})\quad}
+}
+\newcommand{\setsectionstyleplain}
+{
+	\titleformat{name=\section}					{\Large\bfseries}{}{0pt}{\thesection\quad}
+	\titleformat{name=\subsection}				{\large\bfseries}{}{0pt}{\thesubsection\quad}
+	\titleformat{name=\subsubsection}			{\normalfont\bfseries}{}{0pt}{\alph{subsubsection})\quad}
+}
+
 
 
 % << ------<<=====>>------ >>
-% Für Autoren Header
+% For author header
 % << ------<<=====>>------ >>
 \newcommand{\theauthor}
 {
@@ -180,7 +203,7 @@
 
 
 % << ------<<=====>>------ >>
-% Für Autoren Liste
+% For author list
 % << ------<<=====>>------ >>
 \newcommand{\theauthors}
 {
@@ -330,7 +353,7 @@
 
 
 % << ------<<=====>>------ >>
-% Für "- Übungsblatt x -"
+% For "- Übungsblatt x -"
 % << ------<<=====>>------ >>
 \newcommand{\thesubtitle}
 {
@@ -346,9 +369,8 @@
 
 
 % << ------<<=====>>------ >>
-% Datumsberechnung
+% Date calculation
 % << ------<<=====>>------ >>
-% Berechnet Datum in zwei wochen
 \newcommand*{\thedeadline}
 {
 	\ifnum \thesheetnumber = -1
@@ -366,7 +388,7 @@
 
 
 % << ------<<=====>>------ >>
-% Title stuff setzen
+% Title stuff
 % << ------<<=====>>------ >>
 \author{\theauthors}
 \title{\thetitle\n\thesubtitle\\\vspace{0.2cm}\normalsize
@@ -381,16 +403,16 @@
 
 
 % << ------<<=====>>------ >>
-% Section stuff machen
+% Section stuff
 % << ------<<=====>>------ >>
-\setcounter{section}{\thesheetnumber}
-\setcounter{subsection}{0}
-\titleformat{\subsection}{\large\bfseries}{}{0pt}{Aufgabe \thesubsection\quad}
+%\setcounter{section}{\thesheetnumber}
+%\setcounter{subsection}{0}
+%\titleformat{\subsection}{\large\bfseries}{}{0pt}{Aufgabe \thesubsection\quad}
 
 
 
 % << ------<<=====>>------ >>
-% Praktische commands
+% Useful commands
 % << ------<<=====>>------ >>
 \newcommand{\n}{\vspace{5pt}\\}
 \newcommand{\qed}{\\\hspace*{\fill}$\square$}
@@ -399,9 +421,9 @@
 
 
 % << ------<<=====>>------ >>
-% Floating code Umgebung
+% Floating code environment
 % << ------<<=====>>------ >>
-% danke Stackoverflow für die breakablealgorithm umgebung :D
+% thanks to Stackoverflow for the breakablealgorithm environment :D
 \makeatletter
 \newenvironment{breakablealgorithm}
 {
@@ -428,7 +450,7 @@
 
 
 % << ------<<=====>>------ >>
-% Für Gauss-Klammern
+% For Gauss-braces
 % << ------<<=====>>------ >>
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
@@ -436,7 +458,7 @@
 
 
 % << ------<<=====>>------ >>
-% Für header/footer Anzeige
+% For header/footer display
 % << ------<<=====>>------ >>
 \makeatletter
 	\let\ps@plain\ps@fancy
@@ -445,7 +467,7 @@
 
 
 % << ------<<=====>>------ >>
-% Darstellungen für Dinge
+% Display stuff thingies
 % << ------<<=====>>------ >>
 \pagestyle{fancy}
 \lfoot{\theauthor}

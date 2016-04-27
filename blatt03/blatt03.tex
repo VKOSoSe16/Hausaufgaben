@@ -1,0 +1,74 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ngerman]{babel}  
+\usepackage[utf8]{inputenc}
+
+\usepackage{../gail}
+\usepackage{../dadp}
+
+\setfirstauthor{Walter Stieben}
+\setfirstauthorID{4stieben@inf}
+\setsecondauthor{Tim Reipschläger}
+\setsecondauthorID{4reipsch@inf}
+\setthirdauthor{Louis Kobras}
+\setthirdauthorID{4kobras@inf}
+\setfourthauthor{Hauke Stieler}
+\setfourthauthorID{4stieler@inf}
+\settitle{Lösungsstrategien für NP-schwere Probleme der
+Kombinatorischen Optimierung}
+\setsheetnumber{3}
+\setstartdate{2016}{04}{11}
+\setdatefreq{7}
+\setsectionstyletasksalphnum{}
+
+\begin{document}
+	\maketitle
+	\section{}
+		\subsection{}
+		\subsection{}
+	\section{}
+		\subsubsection{}
+			Wenn $\forall v\in D: grad(v)=n>k$ gelten soll, dann gibt es zu viele Kanten ($(n)^2$ viele), als dass man diese durch $k$ viele Knoten überdecken könnte.
+			Mit $k$ Knoten mit $grad(v)=n$ kann man maximal $(n)\cdot k$ Kanten überdecken.\n
+			Bildet $D$ eine $|D|$-Clique in $G$, so ist $k=|D|-2$ und bildet eine Ausnahme, da man mit $k$ vielen Knoten zwar rechnerisch genug Kanten abdecken könnte, jedoch zwei Knoten in der $|D|$-Clique übrig bleiben, die gemeinsam wieder eine Kante hätten.
+			Diese Kante würde nicht abgedeckt werden.\n
+			Wenn also $|D|>k$ gilt, gibt es keine Knotenüberdeckung in $G$.
+		\subsubsection{}
+			\textbf{Hinrichtung}\\
+			TODO: Hinrichtung machen.\n
+			\textbf{Rückrichtung}\\
+			Angenommen $G'$ hat eine Knotenüberdeckung mit $k'$ Knoten.\\
+			Fügt man die in $D$ enthaltenen Knoten zu $G'$ hinzu, so hat $G$ genau $k$ viele Knoten, da $k'=k-|D| \Leftrightarrow k=k'+|D|$ gilt.
+			Alle hinzugefügten Knoten nimmt man in die Knotenüberdeckung von $G$ mit auf, somit sind alle zu diesen ''neuen'' Knoten inzidenten Kanten auch in der Knotenüberdeckung enthalten und es gibt keine Kanten, die nicht getroffen werden.\\
+			Somit hat $G$ eine Knotenüberdeckung mit $k$ Knoten wenn $G'$ eine mit $k'$ vielen Knoten hat.
+		\subsubsection{}
+			Im folgenden wird angenommen, dass $G'$ genau $k'\cdot(k+1)$ viele Knoten und eine $k'$ Knotenüberdeckung besitzt. 
+			Hat $G'$ weniger Knoten, so kann man welche Hinzufügen, ohne, dass sich etwas ändert.\n
+			Behauptung:\\
+			Die Knoten der $k'$ Knotenüberdeckung können keine weiteren Kanten aufnehmen.\n
+			Beweis:\\
+			Jeder der $k'$ vielen Knoten in der Überdeckung hat genau $k$ viele zu ihm inzidente Kanten in $G'$.
+			Dadurch gibt es neben diesen Knoten noch $k'\cdot k$ weitere Knoten, die mit den $k'$ vielen Knoten der Überdeckung die insgesamt $k\cdot k'+k'=k'\cdot (k+1)$ viele Knoten in $G'$ ergeben.\n
+			Angenommen einer der $k'$ vielen Knoten hat mehr als $k$ Kanten, dann wäre er in $D$ und nicht mehr in $G'$, wodurch $G'$ keine $k'\cdot(k+1)$ Knoten mehr hätte.
+			Angenommen einer der $k'$ vielen Knoten hat weniger als $k$ viele Kanten, dann müsste ein anderer Knoten $v$ aus der Überdeckung $k+1$ viele Kanten besitzen, damit $G'$ weiterhin $k'\cdot (k+1)$ Knoten und eine $k'$ Knotenüberdeckung besitzt.
+			Dadurch wäre aber $v$ in $D$ und nicht mehr in $G'$, wodurch $G'$ keine $k'\cdot(k+1)$ vielen Knoten mehr hätte.\\
+			Es hat also jeder Knoten der $k'$ Knotenüberdeckung in $G'$ genau $k$ viele zu ihm inzidente Kanten.\n
+			Behauptung:\\
+			Enthält $G'$ mindestens $k'\cdot(k+1)+1$ Knoten, so gibt es keine Überdeckung in $G$ und $G'$.\n
+			Beweis:\\
+			Angenommen $G'$ enthält $k'\cdot(k+1)+n$ Knoten, dann folgt aus obigen, dass die zusätzlichen Knoten $v_1,\dots,v_n$ jeweils nicht mit einem Knoten $u$ aus der Knotenüberdeckung in $G'$ verbunden sein dürfen (da $u$ sonst $k+1$ inzidente Kanten besäße und nicht in $G'$ wäre, s.o.).\\
+			Daher muss er mit einem Knoten $w$ verbunden sein, der nicht in der Knotenüberdeckung aber noch in $G'$  ist.
+			Folglich gibt es eine Kante $(w, v_i)$ mit $1\leq i\leq n$, welche weder durch die Knotenüberdeckung in $G'$, noch durch die in $G$ getroffen wird.\n
+			In $G'$ kann $(w,v_i)$ nicht getroffen werden, da sich dann die Anzahl der Knoten in der Überdeckung ändern würde, die jedoch durch $k'=k-|D|$ fest gegeben ist.\\
+			In $G$ kann $(w, v_i)$ aber auch nicht getroffen werden, da jeder zusätzliche Knoten $v_i$ nicht mit einem Knoten der Überdeckung in $G$, sondern nur mit ''unbeteiligten'' Knoten verbunden ist. Nimmt man also jeden Knoten $v_i$ mit in die Überdeckung aus $G$ mit auf, erhöht sich dadurch die Größe der Überdeckung für jeden zusätzlichen Knoten, womit die minimale Überdeckung in $G$ die Größe $k+n$ hätte.\n
+			Dadurch ist es nicht möglich, dass $G'$ mehr als $k'\cdot(k+1)$ Knoten enthält und $G$ eine Überdeckung mit der Größe $\leq k$ besitzt.\qed
+		\subsubsection{}
+			Man kann beim Einlesen von $E(G)$ für jeden Knoten dessen Grad speichern indem man für jede Kante den Grad der beiden Knoten jeweils inkrementiert.
+			Dies ist mit indizierten Knoten in $\Ovon{1}$ machbar, ansonsten in $\Ovon{|V(G)|}$.\\
+			Mit dem gespeicherten Grad für jeden Knoten kann man durch einmaliges iterieren über die Knotenmenge $V(G)$ die Menge $D$ erzeugen. Das entspricht einer Laufzeit von $\Ovon{|V(G)|}$.\\
+			Einlesen, speichern und $D$ erzeugen ist also in $\Ovon{|V(G)|}$ möglich.\n
+			Auch das löschen von $D$ aus $G$ geht schnell, denn man kann in $\Ovon{|V(G)|}$ die Knoten und in $\Ovon{|E(G)|}$ die Kanten löschen.
+			Speichert man alle Mengenkardinalitäten zwischen (also von $G, V(G), D$), was kaum Zeit kostet bei jeder Änderung die Kardinalität zu aktualisieren, so kann man in konstanter Zeit prüfen, ob $|V(G')|>k'\cdot(k+1)$ gilt.
+\end{document}

@@ -25,7 +25,8 @@ Kombinatorischen Optimierung}
 \begin{document}
 	\maketitle
 	\section{}
-		\subsection{}
+		\subsubsection{}
+		Das RESOURCE RESERVATION PROBLEM ist NP-Völlständig, da es das Problem SET PACKING leicht anders aufgeschrieben ist und wir schon gezeigt haben, dass SET PACKING NP-Vollständig ist.	Die Familie $S_i$ die SET PACKING übergeben bekommt ist die Menge P, wobei die Elemente von P die benötigten Ressourcen, die der jeweilige Prozess benötigt, in einer Menge sind. Das k aus dem RESOURCE RESERVATION PROBLEM entspricht dem von SET PACKING. Wenn nun k disjunkte Mengen vorhanden sind, sind auch k verschiedene Prozesse aktiv, da durch das disjunkt sein sichergestellt ist, dass die Ressourcen die ein Prozess benötigt kein anderer der gefunden Prozesse benötigt.
 		\subsection{Spezialfall $k=2$}
 			Beim Spezialfall für $k=2$ kann man tatsächlich einen Algorithmus angeben, dessen Laufzeit polynomiell in der Eingabe ist.
 		\alglanguage{pseudocode}
@@ -51,8 +52,16 @@ Kombinatorischen Optimierung}
 		Man Geht in der äußeren Schleife alle $p\in P$ durch , also $|P|$ mal. Dort verteilt man zunächst maximal $n$ viele Ressourcen, ergo $n$ viele Schritte. Nun wird $p$ aus $P$ entfernt, was mit einer schlauen Implementierung (z.B. als Liste) in konstanter Zeit machbar ist.\\
 		Danach beginnt die innere Schleife, welche alle $q\in P$ durch geht und somit $|P|-1$ mal durchläuft. Dort wird dann geprüft ob eine weitere Verteilung der restlichen Ressourcen auf $q$ möglich ist. Auch da benötigt man maximal $n$ viele Schritte.\\
 		Man erhält also eine Laufzeit von $\Ovon{|P|\cdot(n+|P|\cdot n)}$, was mit $\Ovon{|P|\cdot n+|P|^2\cdot n}$ äquivalent ist (hier erkennt man aber schön das Polynom).
-		\subsection{}
-		\subsection{}
+		\subsubsection{}
+		Für diesen Spezialfall können wir den Algorithmus von Edmonds und Karp benutzen.
+		Wir wissen das jeder Prozess genau eine Ressource \glqq Person \grqq und genau eine Ressource \glqq Ausrüstungsgegenstand \grqq benötigt.
+		 Damit wir mit dem Algorithmus eine Lösung bekommen erstellen wir uns einen bipartiten Graph indem wir jede \glqq Person \grqq der Menge X hinzufügen und jeden \glqq Ausrüstungsgegenstand \grqq der Menge Y hinzufügen.
+		 Nun erstellen wir für jedes Element aus X und Y einen Knoten.
+		 Die Kanten erstellen wir uns mit den Prozessen, diese haben jeweils ein x-Element und ein y-Element und genau diese verbinden wir nun mit einer Kante und da ein Prozess keine 2 x- oder y-Elemente haben kann erzeugen wir so einen bipartiten Graphen.
+		 Mit dem Algorithmus von Edmonds und Karp können wir jetzt in Polynomialzeit ein maximales Matching bestimmen, dabei sind die Matchingkanten die Prozesse, die gleichzeitig aktiv sein können, da bei einem Matching keine 2 unterschiedlichen Kanten an den gleichen Knoten anstoßen, demnach keine 2 Prozesse die gleiche \glqq Person \grqq oder den gleichen \glqq Ausrüstungsgegenstand \grqq benutzen.
+		 Ist die Anzahl der Matchingkanten nun $\geq$ k, haben wir eine Ja-Instanz, andernfalls eine Nein-Instanz.
+		\subsubsection{}
+		--
 	\section{}
 		\subsection{\threesat auf \setsplit reduzieren}
 			\subsubsection{Zeigen, dass $\setsplit\in\np$ gilt}
@@ -67,6 +76,8 @@ Kombinatorischen Optimierung}
 			Um eine Eingabe für das \setsplit Problem zu bekommen, wandelt man $A$ wie folgt um:\n
 			Jedes Literal wird mit seinem Komplement in eine Menge geschlossen, also $\{x_1, \overline{x_i}\}$, analog wird jede Klausel in eine Menge geschlossen.
 			Dazu wird ein neues Element $F$ erzeugt und jeder bisherigen Teilmenge hinzugefügt, sodass $F$ in jeder Teilmenge vorhanden ist. $F$ wird als \texttt{false} interpretiert und ist immer in der Partition enthalten, in der alle Literale, welche zu 0 ausgewertet werden enthalten sind.\n
+			Die Reduktion geschieht in polynomieller Zeit, da man zunächst alle Literale ($n$ viele) in Mengen vereinigt, dann zu jeder Klausel eine Menge erzeugt (es gibt $k$ viele Klauseln), dann $F$ erzeugt (geht in konstanter Zeit) und danach noch jeder Klauselmenge das $F$ hinzufügt (wieder $k$ mal).\\
+			Insgesamt ergibt das eine Laufzeit von $\Ovon{n+2\cdot k}$, was ein Polynom ist.\n
 			Damit ist die Reduktion fertig und man muss nur noch das Orakel von \setsplit befragen.
 			\subsubsection{Korrektheit für ''$\Rightarrow$''}
 			Behauptung: $A$ besitzt eine erfüllende Belegung, dann existiert ein \setsplit in obiger Konstruktion.\n
@@ -85,4 +96,33 @@ Kombinatorischen Optimierung}
 			Dadurch wird garantiert, dass es keine Wiedersprüche in der Auswertung geben kann.\\
 			In dieser Partition taucht jedes Literal auf und jedes Literal wird zu 1 ausgewertet, somit ist $A$ mit dieser Belegung erfüllt.
 		\subsection{}
+		\subsection{\subsetsum auf \numberpartition \\ reduzieren}
+			\subsubsection{Zeigen, dass $\numberpartition\;\in\np$ gilt}
+			Wir geben einen polynomiellen Verifikationsalgorithmus für ein Zertifikat $\langle S, S_1, S_2 \rangle$ an. \n
+			Zuerst prüfen wir dazu, ob $S_1$ und $S_2$ wirklich eine Partitionierung von $S$ darstellen. Dazu prüfen wir für jedes Element aus $S_1$ und $S_2$, ob dieses jeweils in $S$ enthalten ist und markieren jedes gefundene Element in $S$. Dies braucht maximal - nämlich bei gültigen Eingaben - $|S|^2$ viele Operationen, da dann für jedes Element aus $S$ eine Suche auf $S$ durchgeführt werden muss (naive Suche ist in $O(|S|)$). Schlägt eine Suche fehl terminiert der Algorithmus und falsifiziert das Zertifikat. Nachdem alle Suchen ausgeführt wurden, muss für jedes Element aus $S$ noch geprüft werden, ob es markiert wurde, was in $|S|$ Schritten möglich ist. Ist ein Element nicht markiert, kann der Algorithmus auch hier mit dem Ergebnis \texttt{flase} terminieren. Ansonsten können wir nun von einer korrekten Partitionierung ausgehen.\n
+			Danach müssen wir nur noch die Summe der Elemente von $S_1$ und $S_2$ bestimmen, was bei $|S|$ Elementen auch $|S|$ Operationen braucht, da wir jedes Element ein mal betrachten müssen. Am Ende braucht es noch einen Vergleich beider Summen. Sind die Summen gleich, gibt der Algorithmus \texttt{true} aus, ansonsten \texttt{false}.\n
+			Der Algorithmus verifiziert damit das Zertifikat und liegt in $O(|S^2|)$, ist also polynomiell. Damit liegt \numberpartition folglich auch in NP.
+			\subsubsection{Reduktion angeben}
+			Wir gehen von einer Eingabe $\langle S, W \rangle$ mit $S = w_1 \dots w_n$ für \numberpartition aus, wobei wir nur mit positiven ganzen Zahlen arbeiten. \n
+			Wir konstruieren nun eine Eingabe $\langle S^\prime \rangle$ für \subsetsum. \n
+			Dazu bilden wir zuerst $X = \sum\limits_{w \in S} w$. \n
+			Jetzt berechnen wir noch die Werte $a = 2X - W$ und $b = X + W$. \n
+			Die Menge $S^\prime$ sei nun gegeben durch $S \cup \{a, b\}$ und damit ist die Reduktion abgeschlossen. \n
+			
+			Da $\sum\limits_{w \in S^\prime} w = 4X$, fragen wir jetzt also, ob wir zwei Teilmengen von $S^\prime$ finden können, sodass deren Summe jeweils 2X beträgt. \n
+			Die Reduktion erfolgt dabei in Polynomialzeit, weil wir lediglich die Summe von n Elementen bilden müssen und dann noch 2 weitere Zahlen berechnen und eine Vereinigung von n + 2 Elementen bilden müssen. Die Reduktion liegt damit in $O(n)$.
+			
+			\subsubsection{Korrektheit für ''$\Rightarrow$''}
+			Behauptung: Gibt es eine gültige Partitionierung für \numberpartition , existiert auch eine entsprechende Teilmenge für \subsetsum .\n
+			
+			In einer gültigen Partitionierung von $S^\prime$ können a und b nicht in derselben Teilmenge sein, weil schon $a + b = 3X$ und beide Teilmengen müssen sich jeweils genau zu 2X addieren.\n
+			
+			Da $a = 2X - W$ müssen in der Teilmenge von a die anderen Elemente  auch genau die Summe W bilden. Lässt man daher a aus dieser Teilmenge heraus, hat man eine Teilmenge von $S$ vorliegen, die sich genau zu W addiert, also eine gültige Einagbe für \subsetsum .
+			
+			\subsubsection{Korrektheit für ''$\Leftarrow$''}
+			Behauptung: Gibt es eine gültige Teilmenge für \subsetsum , existiert auch eine entsprechende Partitionierung für \numberpartition .\n
+
+			Da alle Elemente aus $S$ auch in $S^\prime$ sind, findet sich die gültige Teilmenge von $S$ mit Summe W auch in $S^\prime$ wieder.	
+			Fügen wir jetzt das a zu genau dieser Teilmenge hinzu, ergibt sich  als Summe dieser Menge genau 2X. \n
+			Da die Summe aller Elemente aus $S^\prime$ genau 4X ist, addieren sich die übrigen Elemente aus $S^\prime$ also ebenfalls genau zu 2X, sodass es eine gültige Partitionierung für \numberpartition geben muss.
 \end{document}
