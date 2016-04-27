@@ -3,7 +3,7 @@ Unsere Hausaufgaben im Modul `Lösungsstrategien für NP-schwere Probleme der
 Kombinatorischen Optimierung` an der Uni Hamburg.
 
 # Rulez
-Bitte führt jedes mal, wenn ihr irgendwie `git pull` macht auch eben die `getpackages.sh` aus. Wenn ihr windows benutzt meckert nicht, wenn LaTeX fehler ausspuckt, weil irgendwas in den packages `dadp` oder `gail` kaputt ist ;)
+Bitte führt jedes mal, wenn ihr irgendwie `git pull` macht auch eben die `getpackages.sh` aus. Wenn ihr windows benutzt manuell unter https://github.com/hauke96/LaTeX runterladen/pullen (nicht in das VKO-Repo pullen).
 
 # Code-Konvention
 ## Formatting
@@ -19,7 +19,7 @@ Bitte führt jedes mal, wenn ihr irgendwie `git pull` macht auch eben die `getpa
 ## Packages/Makros
 Es sind zwei Packages hier enthalten: `dadp` (Das AD Package) und `gail` (Grundgerüst für Abgaben in LaTeX).
 
-Die beiden Packages stammen aus https://github.com/hauke96/LaTeX.
+Die beiden Packages stammen aus https://github.com/hauke96/LaTeX (nicht ins VKO-Repo pullen).
 
 ### dadp
 Ist eher eine Makro-Sammlung
@@ -35,3 +35,9 @@ Im Headerbereich kann man die Autoren, Daten, etc. für das `\maketitle` definie
 Stimmt etwas mit den Daten nicht (z.B. den Namen eines Autors vergessen), wird das direkt rot im Dokument vermerkt (es wird keinen Compiler Error geben!).
 
 An sich ist hier alles soweit definiert, man muss nur drauf achten, dass die Blattnummer stimmt.
+
+#HOWTO:Drucken
+Zunächst in den Ordner mit dem Repo cd-en, dann einfach `sh drucken.sh blattxx druckername` eingeben. Das `xx` natürlich durch die Blattnummer (also z.B. `04`) ersetzen und `druckername` durch den Linux bekannten Druckernamen (s.u.).
+
+## Drucker finden
+Einfach mit `lpstat -v` die verfügbaren Drucker auflisten.
