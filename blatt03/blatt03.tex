@@ -37,12 +37,14 @@ Kombinatorischen Optimierung}
 			Wenn also $|D|>k$ gilt, gibt es keine Knotenüberdeckung in $G$.
 		\subsubsection{}
 			\textbf{Hinrichtung}\\
-			TODO: Hinrichtung machen.\n
+			Angenommen $G$ hat eine Knotenüberdeckung mit $k$ Knoten.\\
+			In $G$ und $G'$ werden nun alle Kanten getroffen, wobei es Kanten von $G$ zu seinem Untergraphen $G'$ gibt. Nimmt man nun aus $G$ eben die $|D|$ vielen Knoten heraus durch die man $G'$ erhält, so gibt es keine Kanten mehr, die von $G$ nach $G'$ führen. Kanten, die nur innerhalb von $G'$ existieren bleiben jedoch bestehen.\\
+			Somit hat $G$ eine $k'$ Knotenüberdeckung, wenn es eine $k$ Knotenüberdeckung in $G$ gibt.\n
 			\textbf{Rückrichtung}\\
 			Angenommen $G'$ hat eine Knotenüberdeckung mit $k'$ Knoten.\\
 			Fügt man die in $D$ enthaltenen Knoten zu $G'$ hinzu, so hat $G$ genau $k$ viele Knoten, da $k'=k-|D| \Leftrightarrow k=k'+|D|$ gilt.
 			Alle hinzugefügten Knoten nimmt man in die Knotenüberdeckung von $G$ mit auf, somit sind alle zu diesen ''neuen'' Knoten inzidenten Kanten auch in der Knotenüberdeckung enthalten und es gibt keine Kanten, die nicht getroffen werden.\\
-			Somit hat $G$ eine Knotenüberdeckung mit $k$ Knoten wenn $G'$ eine mit $k'$ vielen Knoten hat.
+			Somit hat $G$ eine Knotenüberdeckung mit $k$ Knoten, wenn $G'$ eine mit $k'$ vielen Knoten hat.
 		\subsubsection{}
 			Im folgenden wird angenommen, dass $G'$ genau $k'\cdot(k+1)$ viele Knoten und eine $k'$ Knotenüberdeckung besitzt. 
 			Hat $G'$ weniger Knoten, so kann man welche Hinzufügen, ohne, dass sich etwas ändert.\n
