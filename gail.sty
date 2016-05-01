@@ -80,7 +80,7 @@
 
 
 % << ------<<=====>>------ >>
-% Variables for authors etc.
+% Variables
 % << ------<<=====>>------ >>
 \newcommand{\firstauthorvar}{$ $}
 \newcommand{\firstauthorIDvar}{$ $}
@@ -95,6 +95,7 @@
 \newcommand{\thesheetnumber}{-1}
 \setdatenumber{1800}{1}{01}
 \newcommand{\datefreq}{7}
+\newcommand{\interruptions}{0}
 
 \newcommand{\thetitle}{\huge \error{title not set!}}
 
@@ -112,6 +113,7 @@
 \newcommand{\setfourthauthor}[1]{\renewcommand{\fourthauthorvar}{#1}}
 \newcommand{\setfourthauthorID}[1]{\renewcommand{\fourthauthorIDvar}{#1}}
 \newcommand{\setcarer}[1]{\renewcommand{\carerVar}{#1}}
+\newcommand{\setinterruptions}[1]{\renewcommand{\interruptions}{#1}}
 
 
 
@@ -379,7 +381,7 @@
 		\ifnum \thedateyear = 1800
 			\error{start date not set!}
 		\else
-			\addtocounter{datenumber}{\datefreq*\thesheetnumber}\setdatebynumber{\thedatenumber}\datedate
+			\addtocounter{datenumber}{\datefreq*\thesheetnumber+\datefreq*\interruptions}\setdatebynumber{\thedatenumber}\datedate
 		\fi
 	\fi
 	\vspace{0.875cm}
