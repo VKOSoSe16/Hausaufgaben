@@ -27,7 +27,42 @@ Kombinatorischen Optimierung}
 	\maketitle
 	\section{}
 		\subsection{}
+		Da \chitset ein NP-vollständiges Problem ist, muss es hierfür einen deterministischen und polynomiellen Verifikationsalgoritmus geben. \n
+		Mit diesem Wissen wollen wir nun einen Algorithmus angeben, der eine 
+		
 		\subsection{}
+		
+		
+		
+		\subsection{}
+		Wir wollen zeigen, dass \twohitset mit dem kleinsten erlaubten c NP-vollständig ist und dann begründen, warum \cpohitset ebenfalls NP-vollständig sein muss, um insgesamt zu zeigen, warum \chitset NP-vollständig ist. Dies ging leider nicht besonders kurz. \n
+		
+Hier zur Wiederholung unsere Lösung für Aufgabe 1.2.b.) von Aufgabenblatt 1 : \n
+Wir haben zum Reduzieren als alternatives Ausgangsproblem \vertexcover gewählt.\n
+			Sei $ \langle G, k \rangle $ mit $ G = (V, E)$ eine Eingabeinstanz von \vertexcover. Eine Instanz $ \langle A,B, k^\prime \rangle $ für \hitset erhalten wir, indem wir $k^\prime = k$ setzen (1 Schritt) $A=V$ setzen (1 Schritt) und B konstruieren, indem wir für alle Kanten $(u,v) \in E$ eine Menge $\{u,v\}$ zu B hinzufügen ($|E|$ Schritte).\n
+			Diese Reduktion liegt in $O(|E|)$ und ist damit polynomiell.\n
+			Zur Korrektheit:
+			\begin{itemize}
+				\item Angenommen, es gibt ein Hitting Set der Größe $k$ in \hitset. Dann wird in jeder Menge $B_1 \dots B_m$ mindestens ein Element durch $H$ getroffen. \\
+				Dies ist durch die Reduktion gleichbedeutend damit, dass für \vertexcover mindestens ein Endknoten einer jeden Kante in der Menge $S$ ist, darum ist $S = H$ eine Knotenüberdeckung.
+				\item Angenommen, es gibt eine Knotenüberdeckung der Größe $k$ in \vertexcover. Dann muss mindestens ein Endknoten von jeder Kante in $S$ sein, weshalb sich mit $H = S$ ein Hitting Set der Größe $k$ ergibt.
+			\end{itemize}
+
+		Wir stellen fest, dass durch die Art der Reduktion alle Mengen $B_1 \dots B_m$ immer genau 2 Elemente haben und identifizieren diese Reduktion somit insbesondere auch als Reduktion auf \twohitset .
+		
+		\subsubsection{Reduktion angeben}
+		Eine Reduktion von \chitset auf \cpohitset ist trivial, weil nämlich die Eingabe für \chitset prinzipiell direkt als Eingabe für \cpohitset übernommen werden kann. Damit hier nicht das Problem auftritt, dass für \chitset ungültige Eingaben mit einem $|B_i| > c $ als gültige Eingaben in \cpohitset übernommen werden, müssen wir alle Mengen $B_1 \dots B_m$ vorher durchgehen und die Elemente zählen, was für gültige Eingaben jeweils nur c Elemente sein können, weshalb diese Überprüfung und damit auch die ganze Reduktion in $O(m \cdot c)$ liegt. Schlägt diese Überprüfung fehl, wird direkt \texttt{false} ausgegeben, ansonsten wird die Eingabe wie oben beschrieben übernommen.
+		\subsubsection{Korrektheit für ''$\Rightarrow$''}
+		Behauptung: Gibt es ein gültiges Hitting Set in \cpohitset , so ist dieses ebenfalls ein gültiges Hitting Set in \chitset . \n
+		
+		Da wir durch die Reduktion wissen, dass wir keine Mengen $|B_i| > c $ in der Eingabe für \cpohitset hatten, sind also alle Faktoren bis auf das c gleich geblieben und die lockerere Schranke für c wurde nicht genutzt, demnach muss das gefundene Hitting set auch ein Hitting Set in \chitset sein.
+		
+		\subsubsection{Korrektheit für ''$\Leftarrow$''}
+		Behauptung: Gibt es ein gültiges Hitting Set in \chitset , so ist dieses ebenfalls ein gültiges Hitting Set in \cpohitset . \n
+		
+		Ein Hitting Set in \chitset ist für größere c immer auch ein Hitting Set, da  jedes $B_i$ aus $B_1 \dots B_m$ die Eigenschaft $|B_i|\leq c$ und somit automatisch auch $|B_i|\leq c+1$ erfüllt und das Hitting Set, sowie die Menge A nicht selbst von c abhängig sind.
+		
+		
 	\section{}
 		\subsubsection{}
 			Wenn $\forall v\in D: grad(v)=n>k$ gelten soll, dann gibt es zu viele Kanten ($(n)^2$ viele), als dass man diese durch $k$ viele Knoten überdecken könnte.
