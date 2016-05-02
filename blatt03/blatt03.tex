@@ -28,14 +28,29 @@ Kombinatorischen Optimierung}
 	\section{}
 		\subsection{}
 		Da \chitset ein NP-vollständiges Problem ist, muss es hierfür einen deterministischen und polynomiellen Verifikationsalgoritmus geben. \n
-		Mit diesem Wissen wollen wir nun einen Algorithmus angeben, der eine 
+		Mit diesem Wissen wollen wir nun einen Algorithmus angeben, der seine eigenen Zertifikate erstellt und diese in Polynomialzeit verifiziert.
+		Den Algorithmus zum Verifizieren entwickeln wir analog zu demjenige, den wir für Hausaufgabe 1.2 aus Aufgabenblatt 1 angefertigt hatten. \n
+			Die Bedingung, dass $|H|\leq k$ gilt, ist trivial lässt sich  in einer Laufzeit von $\Ovon{|H|}$ prüfen .\n
+			Um zu überprüfen ob $H$ wirklich ein \hitset ist, geht man für jedes $h\in H$ durch jedes $B_i$ mit $0\leq i \leq m$ und prüft ob $h$ in einem $B_i$ vorkommt. Wenn dem so ist, ist $H$ ein \hitset, ansonsten nicht.\\
+			Die Laufzeit ist dabei polynomiell in der Anzahl der Teilmengen $B_i$. Für alle $|H|$-Elemente aus $H$ geht man jedes Element aus jedem $B_i$ durch, was maximal $c$ viele sind. Dadurch hat man mit $|H| \leq k \leq n $ die Laufzeit $c\cdot m\cdot n$. \n
+		Da es diesen Algorithmus gibt, können wir außerdem sagen, dass \chitset in NP liegt.
+		Wir wollen jetzt alle möglichen Zertifikate für diesen Algorithmus erstellen und wenn eines verifiziert wird, akzeptiert der Algorithmus die Eingabe, ansonsten nicht. Ein einzelnes Zertifikat kann erstellt werden, indem k Elemente aus n ausgewählt werden.
+		Die Funktion f(k) soll dann die Anzahl der Möglichkeiten angeben, diese Elemente auszuwählen.
+		Weiter sind wir nicht gekommen; uns fehlte eine konkrete Idee, die Anzahl der Zertifikate nur mit k und c abzuschätzen, ohne n und m zu benutzen.
 		
 		\subsection{}
-		
+		Folgende Dinge können wir mit Sicherheit sagen:
+		\begin{itemize}
+		\item Da das Problem NP-Vollständig ist und p(n,m) polynomiell ist, muss f(k) nicht exponentiell sein, weil sonst der ganze Algorithmus polynomiell wäre und dann P = NP gelten würde, was sehr unwahrscheinlich ist.
+		\item Da k der einzige Parameter für die Funktion f ist, muss er in dieser als Exponent vorkommen, damit der Algorithmus exponentiell in der Eingabe ist.
+		\item Wir können in polynomieller Laufzeit ein Zertifikat erstellen und verifizieren. die Auswahl der k Elemente aus A für ein Zertifikat ist durch n beschränkt und der Algorithmus zur Verifikation durch $c\cdot m\cdot n$. 
+		\end{itemize}
+		f(k) haben wir zu $f_c(k) = 2^{c \cdot k}$ geschätzt und  p(n,m) zu
+		$p(n,m) = c\cdot m\cdot n + n$ ermittelt. Damit ergibt sich dann auch die Laufzeit von $\Ovon{f_c(k) \cdot p(n,m)}$
 		
 		
 		\subsection{}
-		Wir wollen zeigen, dass \twohitset mit dem kleinsten erlaubten c NP-vollständig ist und dann begründen, warum \cpohitset ebenfalls NP-vollständig sein muss, um insgesamt zu zeigen, warum \chitset NP-vollständig ist. Dies ging leider nicht besonders kurz. \n
+		Wir wollen zeigen, dass \twohitset mit dem kleinsten erlaubten c NP-vollständig ist und dann begründen, warum \cpohitset ebenfalls NP-vollständig sein muss, um insgesamt zu zeigen, warum \chitset NP-vollständig ist. Dies ging leider nicht besonders kurz. Für den Beweis, dass \chitset in NP liegt, siehe Aufgabenteil a. \n
 		
 Hier zur Wiederholung unsere Lösung für Aufgabe 1.2.b.) von Aufgabenblatt 1 : \n
 Wir haben zum Reduzieren als alternatives Ausgangsproblem \vertexcover gewählt.\n
