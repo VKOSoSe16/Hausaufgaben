@@ -1,0 +1,232 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ngerman]{babel}  
+\usepackage[utf8]{inputenc}
+
+\usepackage{../gail}
+\usepackage{../dadp}
+
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage{tikz-qtree}
+
+\setfirstauthor{Walter Stieben}
+\setfirstauthorID{4stieben@inf}
+\setsecondauthor{Tim Reipschläger}
+\setsecondauthorID{4reipsch@inf}
+\setthirdauthor{Louis Kobras}
+\setthirdauthorID{4kobras@inf}
+\setfourthauthor{Hauke Stieler}
+\setfourthauthorID{4stieler@inf, 6664494}
+\settitle{Lösungsstrategien für NP-schwere Probleme der
+Kombinatorischen Optimierung}
+\setsheetnumber{4}
+\setstartdate{2016}{04}{11}
+\setdatefreq{7}
+\setsectionstyletasksalphnum{}
+
+\begin{document}
+	\maketitle
+	\section{}
+		\subsubsection{}\vspace{-0.25cm}
+		\begin{tikzpicture}[
+			level distance=1.25cm,sibling distance=0.5cm,
+			edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+			every tree node/.style={align=center,anchor=north}]
+			\Tree
+			[.\text{\textbullet}
+					\edge node[above] {$x_4$};
+					[.\text{\textbullet} 
+						\edge node[above left] {$x_3$};
+						[.\text{\textbullet} 
+							\edge node[left] {$x_1$};
+							[.\text{\textbullet} 
+								\edge node[left] {$x_2$};
+								[.\text{\textbullet}\\9
+								]
+								\edge node[right] {$\overline{x_2}$};
+								[.\text{\textbullet}\\8
+								]
+							]
+							\edge node[right] {$\overline{x_1}$};
+							[.\text{\textbullet} 
+								\edge node[left] {$x_2$};
+								[.\text{\textbullet}\\7
+								]
+								\edge node[right] {$\overline{x_2}$};
+								[.\text{\textbullet}\\8
+								]
+							]
+						]
+						\edge node[above right] {$\overline{x_3}$};
+						[.\text{\textbullet} 
+							\edge node[left] {$x_1$};
+							[.\text{\textbullet} 
+								\edge node[left] {$x_2$};
+								[.\text{\textbullet}\\9
+								]
+								\edge node[right] {$\overline{x_2}$};
+								[.\text{\textbullet}\\7
+								]
+							]
+							\edge node[right] {$\overline{x_1}$};
+							[.\text{\textbullet} 
+								\edge node[left] {$x_2$};
+								[.\text{\textbullet}\\6
+								]
+								\edge node[right] {$\overline{x_2}$};
+								[.\text{\textbullet}\\6
+								]
+							]
+						]
+					]
+					\edge node[above] {$\overline{x_4}$};
+					[.\text{\textbullet} 
+						\edge node[above left] {$x_3$};
+						[.\text{\textbullet} 
+							\edge node[left] {$x_1$};
+							[.\text{\textbullet} 
+								\edge node[left] {$x_2$};
+								[.\text{\textbullet}\\9
+								]
+								\edge node[right] {$\overline{x_2}$};
+								[.\text{\textbullet}\\8
+								]
+							]
+							\edge node[right] {$\overline{x_1}$};
+							[.\text{\textbullet} 
+								\edge node[left] {$x_2$};
+								[.\text{\textbullet}\\6
+								]
+								\edge node[right] {$\overline{x_2}$};
+								[.\text{\textbullet}\\7
+								]
+							]
+						]
+						\edge node[above right] {$\overline{x_3}$};
+						[.\text{\textbullet} 
+							\edge node[left] {$x_1$};
+							[.\text{\textbullet} 
+								\edge node[left] {$x_2$};
+								[.\text{\textbullet}\\9
+								]
+								\edge node[right] {$\overline{x_2}$};
+								[.\text{\textbullet}\\8
+								]
+							]
+							\edge node[right] {$\overline{x_1}$};
+							[.\text{\textbullet} 
+								\edge node[left] {$x_2$};
+								[.\text{\textbullet}\\6
+								]
+								\edge node[right] {$\overline{x_2}$};
+								[.\text{\textbullet}\\7
+								]
+							]
+						]
+					]
+			]
+		\end{tikzpicture}
+		
+		\subsubsection{}\vspace{-0.25cm}
+		\begin{tikzpicture}[
+			level distance=1.25cm,sibling distance=0.5cm,
+			edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+			every tree node/.style={align=center,anchor=north}]
+			\Tree
+			[.\text{\textbullet}
+					\edge node[above] {$x_4$};
+					[.\text{\textbullet} 
+						\edge node[above left] {$x_3$};
+						[.\text{\textbullet} 
+							\edge node[left] {$x_1$};
+							[.\text{\textbullet} 
+								\edge node[left] {$x_2$};
+								[.\text{\textbullet}\\9
+								]
+								\edge[draw=none] node[above=0.25cm, right=-0.3cm] {$\{\overline{x_1}\vee\overline{x_3}\}$};
+								[.\text{}
+								]
+							]
+							\edge node[right] {$\overline{x_1}$};
+							[.\text{\textbullet} 
+								\edge[draw=none] node[above=0.25cm, right=-0.25cm] {$\{x_1\}$};
+								[.\text{}
+								]
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+							]
+						]
+						\edge node[above right] {$\overline{x_3}$};
+						[.\text{\textbullet} 
+							\edge[draw=none] node[above=0.25cm, right=-.075cm] {$\{x_3\}$};
+							[.\text{}
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+							]
+							\edge[draw=none] node[right] {};
+							[.\text{}
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+							]
+						]
+					]
+					\edge node[above] {$\overline{x_4}$};
+					[.\text{\textbullet} 
+						\edge node[above left] {$x_3$};
+						[.\text{\textbullet} 
+							\edge node[left] {$x_1$};
+							[.\text{\textbullet} 
+								\edge[draw=none] node[above=0.25cm, right=-0.65cm] {$\{\overline{x_1}\vee\overline{x_3}\}$};
+								[.\text{}
+								]
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+							]
+							\edge node[right] {$\overline{x_1}$};
+							[.\text{\textbullet} 
+								\edge[draw=none] node[above=0.25cm, right=-.25cm] {$\{x_1\}$};
+								[.\text{}
+								]
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+							]
+						]
+						\edge node[above right] {$\overline{x_3}$};
+						[.\text{\textbullet} 
+							\edge[draw=none] node[right] {};
+							[.\text{}
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+							]
+							\edge[draw=none] node[above=0.25cm, right=-.85cm] {$\{x_3\}$};
+							[.\text{}
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+								\edge[draw=none] node[right] {};
+								[.\text{}
+								]
+							]
+						]
+					]
+			]
+		\end{tikzpicture}
+\end{document}
