@@ -12,6 +12,8 @@
 \usetikzlibrary{trees}
 \usepackage{tikz-qtree}
 
+\usepackage{lscape}
+
 \setfirstauthor{Walter Stieben}
 \setfirstauthorID{4stieben@inf, 6704488}
 \setsecondauthor{Tim Reipschläger}
@@ -229,4 +231,206 @@ Kombinatorischen Optimierung}
 					]
 			]
 		\end{tikzpicture}
+		
+		\newpage
+		
+		\begin{landscape}
+
+		\section{}
+		Aus Platzgründen mussten wir die Beschriftungen der Knoten in eine Tabelle auf der nächsten Seite auslagern. \\
+		\ \\
+		\begin{tikzpicture}[
+			level distance=1.5cm,sibling distance=0.5cm,
+			edge from parent path={(\tikzparentnode) -- (\tikzchildnode)},
+			every tree node/.style={align=center,anchor=north}]
+			\Tree
+			[. F(x)	
+					\edge node[above left] {$e_{12}$};		
+					[. \text{$S_1$}
+						\edge node[above left] {$e_{23}$};		
+						[. \text{$S_2$}
+							\edge node[above left] {$e_{34}$};		
+							[. \text{$S_3$}
+								\edge[draw=none] node[above] {$ \geq 26 $};
+								[.\text{}
+								]
+							]
+							\edge node[above right] {$\overline{e}_{34}$};		
+							[. \text{$S_4$}
+								\edge[draw=none] node[above] {$ 25 $};
+								[.\text{}
+								]
+							]
+						]
+						\edge node[above right] {$\overline{e}_{23}$};		
+						[. \text{$S_5$}
+							\edge node[above left] {$e_{24}$};		
+							[. \text{$S_6$}
+								\edge node[above left] {$e_{43}$};		
+								[. \text{$S_7$}
+									\edge[draw=none] node[above] {$ \geq 23 $};
+									[.\text{}
+									]
+								]
+								\edge node[above right] {$\overline{e}_{43}$};		
+								[. \text{$S_8$}
+									\edge[draw=none] node[above] {$ \geq 20 $};
+									[.\text{}
+									]
+								]
+							]
+							\edge node[above right] {$\overline{e}_{24}$};		
+							[. \text{$S_9$}
+								\edge[draw=none] node[above] {$ \geq 21 $};
+								[.\text{}
+								]
+							]
+						]
+					]
+					\edge node[above right] {$\overline{e}_{12}$};
+					[. \text{$S_{10}$}
+						\edge node[above left] {$e_{13}$};		
+						[. \text{$ S_{11} $}
+							\edge node[above left] {$e_{32}$};		
+							[. \text{$ S_{12} $}
+								\edge[draw=none] node[above] {$ \geq 20 $};
+								[.\text{}
+								]
+							]
+							\edge node[above right] {$\overline{e}_{32}$};		
+							[. \text{$ S_{13} $}
+								\edge node[above left] {$e_{34}$};		
+								[. \text{$ S_{14} $}
+									\edge[draw=none] node[above] {$ \geq 30 $};
+									[.\text{}
+									]
+								]
+								\edge node[above right] {$\overline{e}_{34}$};		
+								[. \text{$ S_{15} $}
+									\edge node[above left] {$e_{52}$};		
+									[. \text{$ S_{16} $}
+										\edge[draw=none] node[above] {$ \geq 28 $};
+										[.\text{}
+										]
+									]
+									\edge node[above right] {$\overline{e}_{52}$};		
+									[. \text{$ S_{17} $}
+										\edge[draw=none] node[above] {$ \geq 27 $};
+										[.\text{}
+										]
+									]
+								]
+							]
+						]
+						\edge node[above right] {$\overline{e}_{13}$};		
+						[. \text{$ S_{18} $}
+							\edge node[above left] {$e_{14}$};		
+							[. \text{$ S_{19} $}
+								\edge node[above left] {$e_{42}$};		
+								[. \text{$ S_{20} $}
+									\edge node[above left] {$e_{23}$};		
+									[. \text{$ S_{21} $}
+										\edge[draw=none] node[above] {$ 17 $};
+										[.\text{}
+										]
+									]
+									\edge node[above right] {$\overline{e}_{23}$};		
+									[. \text{$ S_{22} $}
+										\edge[draw=none] node[above] {$ \geq 23 $};
+										[.\text{}
+										]
+									]
+								]
+								\edge node[above right] {$\overline{e}_{42}$};		
+								[. \text{$ S_{23} $}
+									\edge node[above left] {$e_{43}$};		
+									[. \text{$ S_{24} $}
+										\edge[draw=none] node[above] {$ \geq 25 $};
+										[.\text{}
+										]
+									]
+									\edge node[above right] {$\overline{e}_{43}$};		
+									[. \text{$ S_{25} $}
+										\edge[draw=none] node[above] {$ \geq 22 $};
+										[.\text{}
+										]
+									]
+								]
+							]
+							\edge node[above right] {$\overline{e}_{14}$};		
+							[. \text{$ S_{26} $}
+								\edge node[above left] {$e_{52}$};		
+								[. \text{$ S_{27} $}
+									\edge[draw=none] node[above] {$ \geq 23 $};
+									[.\text{}
+									]
+								]
+								\edge node[above right] {$\overline{e}_{52}$};		
+								[. \text{$ S_{28} $}
+									\edge node[above left] {$e_{53}$};		
+									[. \text{$ S_{29} $}
+										\edge node[above left] {$e_{32}$};		
+										[. \text{$ S_{30} $}
+											\edge[draw=none] node[above] {$ 17 $};
+											[.\text{}
+											]
+										]
+										\edge node[above right] {$\overline{e}_{32}$};		
+										[. \text{$ S_{31} $}
+											\edge[draw=none] node[above] {$ \geq 25 $};
+											[.\text{}
+											]
+										]
+									]
+									\edge node[above right] {$\overline{e}_{53}$};		
+									[. \text{$ S_{32} $}
+										\edge[draw=none] node[above] {$ \geq 22 $};
+										[.\text{}
+										]
+									]
+								]
+							]
+						]
+					]
+			]
+		\end{tikzpicture}
+		
+		\end{landscape}
+		\newpage
+		Hier die Tabelle mit den Beschriftungen der Knoten. \\
+		\ \\
+		\begin{tabular}{|c|l|} \hline
+		$ S_1 $    & $ S(e_{12}) $ \\ \hline
+		$ S_2 $    & $ S(e_{12}, e_{23}) $ \\ \hline
+		$ S_3 $    & $ S(e_{12}, e_{23}, e_{34}) $ \\ \hline
+		$ S_4 $    & $ S(e_{12}, e_{23}, \overline{e}_{34}) $ \\ \hline
+		$ S_5 $    & $ S(e_{12}, \overline{e}_{23}) $ \\ \hline
+		$ S_6 $    & $ S(e_{12}, \overline{e}_{23}, e_{24}) $ \\ \hline
+		$ S_7 $    & $ S(e_{12}, \overline{e}_{23}, e_{24}, e_{43}) $ \\ \hline
+		$ S_8 $    & $ S(e_{12}, \overline{e}_{23}, e_{24}, \overline{e}_{43}) $ \\ \hline
+		$ S_9 $    & $ S(e_{12}, \overline{e}_{23}, \overline{e}_{24}) $ \\ \hline
+		$ S_{10} $ & $ S(\overline{e}_{12}) $ \\ \hline
+		$ S_{11} $ & $ S(\overline{e}_{12}, e_{13}) $ \\ \hline
+		$ S_{12} $ & $ S(\overline{e}_{12}, e_{13}, e_{32}) $ \\ \hline
+		$ S_{13} $ & $ S(\overline{e}_{12}, e_{13}, \overline{e}_{32}) $ \\ \hline
+		$ S_{14} $ & $ S(\overline{e}_{12}, e_{13}, \overline{e}_{32}, e_{34}) $ \\ \hline
+		$ S_{15} $ & $ S(\overline{e}_{12}, e_{13}, \overline{e}_{32}, \overline{e}_{34}) $ \\ \hline
+		$ S_{16} $ & $ S(\overline{e}_{12}, e_{13}, \overline{e}_{32}, \overline{e}_{34}, e_{52}) $ \\ \hline
+		$ S_{17} $ & $ S(\overline{e}_{12}, e_{13}, \overline{e}_{32}, \overline{e}_{34}, \overline{e}_{52}) $ \\ \hline
+		$ S_{18} $ & $ S(\overline{e}_{12}, \overline{e}_{13}) $ \\ \hline
+		$ S_{19} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, e_{14}) $ \\ \hline
+		$ S_{20} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, e_{14}, e_{42}) $ \\ \hline
+		$ S_{21} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, e_{14}, e_{42}, e_{23}) $ \\ \hline
+		$ S_{22} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, e_{14}, e_{42}, \overline{e}_{23}) $ \\ \hline
+		$ S_{23} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, e_{14}, \overline{e}_{42}) $ \\ \hline
+		$ S_{24} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, e_{14}, \overline{e}_{42}, e_{43}) $ \\ \hline
+		$ S_{25} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, e_{14}, \overline{e}_{42}, \overline{e}_{43}) $ \\ \hline
+		$ S_{26} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, \overline{e}_{14}) $ \\ \hline
+		$ S_{27} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, \overline{e}_{14}, e_{52}) $ \\ \hline
+		$ S_{28} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, \overline{e}_{14}, \overline{e}_{52}) $ \\ \hline
+		$ S_{29} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, \overline{e}_{14}, \overline{e}_{52}, e_{53}) $ \\ \hline
+		$ S_{30} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, \overline{e}_{14}, \overline{e}_{52}, e_{53}, e_{32}) $ \\ \hline
+		$ S_{31} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, \overline{e}_{14}, \overline{e}_{52}, e_{53}, \overline{e}_{32}) $ \\ \hline
+		$ S_{32} $ & $ S(\overline{e}_{12}, \overline{e}_{13}, \overline{e}_{14}, \overline{e}_{52}, \overline{e}_{53}) $ \\ \hline
+		\end{tabular}
 \end{document}
