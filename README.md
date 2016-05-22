@@ -36,6 +36,11 @@ Stimmt etwas mit den Daten nicht (z.B. den Namen eines Autors vergessen), wird d
 
 An sich ist hier alles soweit definiert, man muss nur drauf achten, dass die Blattnummer stimmt.
 
+### makrocol
+Das Paket makrocol enthält allgemeine nützliche Makros für LaTeX/TeX. Es enthält auch `\n` (dies ist nicht mehr in `dadp` enthalten).
+
+Unter anderem enthält es auch die `note` Umgebung für hervorgehobene Bemerkungen/Hinweise/Notizen für den Leser.
+
 #HOWTO:Drucken
 Zunächst in den Ordner mit dem Repo cd-en, dann einfach `sh drucken.sh blattxx druckername` eingeben. Das `xx` natürlich durch die Blattnummer (also z.B. `04`) ersetzen und `druckername` durch den Linux bekannten Druckernamen (s.u.).
 
