@@ -5,30 +5,10 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{nicefrac}
-\usepackage{xcolor}
-\usepackage{colortbl}
 
 \usepackage{../gail}
 \usepackage{../dadp}
-
-\newenvironment{note}
-{
-	\\\hfill
-	\\
-	\hspace*{0cm} % this SHOULD to nothing but it shifts the whole table a bit and this looks pretty good oO
-	\setlength\arrayrulewidth{4pt}\arrayrulecolor{lightgray!40!gray}
-	\begin{tabular}{|p{\textwidth-2cm}}
-	\vspace{0.1cm}
-}
-{
-	\\
-	\vspace{0.1cm}
-	\end{tabular}
-	\vspace{0.1cm}
-	\\\hfill
-	\vspace{0.1cm}
-	\\
-}
+\usepackage{../makrocol}
 
 \newcommand{\explore}{\texttt{EXPLORE$(\Phi, d)$}\xspace}
 

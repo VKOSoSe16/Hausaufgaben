@@ -6,6 +6,9 @@ echo "finished"
 echo -n "GET gail..."
 wget -N -q https://raw.githubusercontent.com/hauke96/LaTeX/master/gail.sty
 echo "finished"
+echo -n "GET makrocol..."
+wget -N -q https://raw.githubusercontent.com/hauke96/LaTeX/master/makrocol.sty
+echo "finished"
 echo ""
 echo "DONE"
 echo "(does not mean that everything just worked fine :P )"
