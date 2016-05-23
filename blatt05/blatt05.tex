@@ -38,7 +38,7 @@ Kombinatorischen Optimierung}
 	\subsubsection*{Laufzeitanalyse}
 	Die Laufzeit des von \explore lässt sich mittels Rekurrenzgleichung und Substitutionsmethode bestimmen.\n
 	Zunächst die Rekurrenzgleichung in Abhängigkeit von $d$ und $n$.
-	Die Menge $C$ taucht nicht auf, da sie nicht Teil der Eingabe von \explore ist. Dem $n$ wäre also noch ein linearer Faktor hinzu zu zählen, was jedoch wenig von Bedeutung ist.
+	Die Menge $C$ taucht nicht auf, da sie nicht Teil der Eingabe von \explore ist. Dem $n$ wäre also noch ein linearer Faktor hinzuzuzählen, was jedoch für die Laufzeit nicht weiter von Bedeutung ist.
 	\[
 		T(d, n)=
 		\begin{cases}
@@ -61,14 +61,14 @@ Kombinatorischen Optimierung}
 				&\makebox[\widthof{${}={}$}][c]{\vdots}					\\
 				&=\frac{3^k-1}{2}+3^k\cdot T(d-k)
 	\end{align*}
-	Nach drei Substitutionen kann man erkennen, der Vorfaktor von $T$ stets $3^k$ ist $(3, 9, 27, 81, \dots)$ und der Faktor vom $n$ stets $\frac{3^k-1}{2}$ sein muss $(1, 4, 13, 40, \dots)$.
+	Nach drei Substitutionen lässt sich erkennen, dass der Koeffizient von $T$ stets $3^k$ (wegen der Folge $3, 9, 27, 81, \dots)$ und der vom $n$ stets $\frac{3^k-1}{2}$ sein kann (wegen der Folge $1, 4, 13, 40, \dots)$.
 	\begin{note}
 	Beweise zu den Gleichungen ersparen wir uns hier der einfachheitshalber.
 	\end{note}
 	Der Abbruch des Algorithmus' geschieht bei $k=d$.
-	Dadurch ist $T(d-k)=T(d-d)=T(0)=n$ und wir erhalten die finale Laufzeit folgender Größenordnung:
+	Dadurch ist $T(d-k)=T(d-d)=T(0)=n$ und wir erhalten die finale Laufzeit in der Größenordnung
 	\[
-		\Ovon{\frac{3^d-1}{2}+3^d\cdot n}
+		\Ovon{\frac{3^d-1}{2}+3^d\cdot n}.
 	\]
 	\subsubsection{}
 	Wenn man $d=\frac{n}{2}$ wählt, so erhält und in die Laufzeit aus 2.a) einsetzt, erhält man folgende neue Laufzeit:
@@ -85,7 +85,7 @@ Kombinatorischen Optimierung}
 	Die Notation $\nicefrac{n}{2}$ statt $\frac{n}{2}$ wird zwar von Mathematikern und Theoretikern oftmals abgelehnt, wird hier jedoch zugunsten der Lesbarkeit verwendet.
 	\end{note}
 	Somit ist die Laufzeit von \explore mit $d=\frac{n}{2}$ in $\Ovon{(n+1)\cdot \left(\sqrt{3}\right)^n}$.\n
-	Um jedoch alle möglichen Belegungen durch zu gehen bedarf es $\dfrac{2^n}{\frac{n}{2}}=\frac{2^{n+1}}{n}$ Aufrufe. Jeder Aufruf von \explore geht $d=\frac{n}{2}$ Belegungen durch, wodurch man nicht volle $2^n$ mögliche Belegungen benötigt.\n
+	Um jedoch alle möglichen Belegungen durchzugehen bedarf es $\dfrac{2^n}{\frac{n}{2}}=\frac{2^{n+1}}{n}$ Aufrufe. Jeder Aufruf von \explore geht $d=\frac{n}{2}$ Belegungen durch, wodurch man nicht volle $2^n$ mögliche Belegungen benötigt.\n
 	Die Anzahl multipliziert mit der Anzahl an Schritten aus vorheriger Rechnung ergibt die Gesamtlaufzeit von $\Ovon{\frac{2^{n+1}}{n}\cdot (n+1)\cdot \left(\sqrt{3}\right)^n}$.\n
-	Somit haben wir eine Laufzeit der Form $\Ovon{p(n)\cdot \left(\sqrt{3}\right)^n}$.
+	Somit haben wir eine Laufzeit der Form $\Ovon{p(n)\cdot \left(\sqrt{3}\right)^n}$ mit $p(n)=\frac{2^{n+1}}{n}\cdot (n+1)$.
 \end{document}
