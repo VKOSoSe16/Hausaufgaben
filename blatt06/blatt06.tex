@@ -44,5 +44,23 @@ Kombinatorischen Optimierung}
 		Das Ergebnis erfüllt somit nicht die Bedingung eines $\rho$-Approqimationsalgorithmus für Maximierungsprobleme $L^*/L_A\leq \rho$. Stattdessen gilt für das Ergebnis $L_A=3$, die totale Summe $L^*=B=10$ und $\rho=2$ die Gleichung $L^*/L_A=10/3=\overline{3,3}\not\leq\rho$.\n
 		Damit ist der angegebene Algorithmus kein 2-Approximationsalgorithmus.\qed
 		\subsubsection{}
+		\alglanguage{pseudocode}
+		\begin{breakablealgorithm}
+			\caption{FindTotalSum}
+			\begin{algorithmic}[1]
+				\Procedure{FindTotalSum}{$A, B, \rho$}
+					\State $A \leftarrow$ ConvertToList($A$)
+					\State $A \leftarrow$ MergeSort($A$)
+					\State $T$ := 0
+					\State $S$ := $\emptyset$
+					\For{$i\in\{n,\dots,1\}$}
+						\If{$T+a_i\leq B$}
+							\State $T\leftarrow T+a_i$
+							\State $S\leftarrow S\cup \{a_i\}$
+						\EndIf
+					\EndFor
+				\EndProcedure
+			\end{algorithmic}
+		\end{breakablealgorithm}
 	\section{}
 \end{document}
