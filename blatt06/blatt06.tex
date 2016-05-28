@@ -1,0 +1,48 @@
+\documentclass[a4paper]{article}
+\usepackage[ngerman]{babel}  
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+
+\usepackage{../gail}
+\usepackage{../dadp}
+\usepackage{../makrocol}
+
+\setfirstauthor{Walter Stieben}
+\setfirstauthorID{4stieben@inf}
+\setsecondauthor{Tim Reipschläger}
+\setsecondauthorID{4reipsch@inf}
+\setthirdauthor{Louis Kobras}
+\setthirdauthorID{4kobras@inf}
+\setfourthauthor{Hauke Stieler}
+\setfourthauthorID{4stieler@inf}
+\settitle{Lösungsstrategien für NP-schwere Probleme der
+Kombinatorischen Optimierung}
+\setsheetnumber{6}
+\setstartdate{2016}{04}{11}
+\setdatefreq{7}
+\setinterruptions{1}
+\setsectionstyletasksalphnum{}
+
+\begin{document}
+	\maketitle
+	\section{}
+		\subsubsection{}
+		Zu zeigen ist, dass der angegebene Algorithmus kein 2-Approximationsalgorithmus ist. Zeigen kann man das mit einem Gegenbeispiel:\n
+		Sei $A=\{1, 2, 8\}$ und $B=10$. Der Algorithmus findet nun folgende Mengen:
+		\begin{center}
+			\begin{tabular}{c|c}
+				Index $i$ & Gefundene Menge $S$\\\hline
+				1 & $\{1\}$\\
+				2 & $\{1, 2\}$\\
+				3 & $\{1, 2\}$\\
+			\end{tabular}
+		\end{center}
+		Der Algorithmus nimmt keine Zahlen mehr ab dem Index auf, da dann die Bedingung $\sum\limits_{a_i\in S} a_i\leq B$ nicht mehr gelten würde, da $1+2+8=11>10$ gilt.\n
+		Das Ergebnis erfüllt somit nicht die Bedingung eines $\rho$-Approqimationsalgorithmus für Maximierungsprobleme $L^*/L_A\leq \rho$. Stattdessen gilt für das Ergebnis $L_A=3$, die totale Summe $L^*=B=10$ und $\rho=2$ die Gleichung $L^*/L_A=10/3=\overline{3,3}\not\leq\rho$.\n
+		Damit ist der angegebene Algorithmus kein 2-Approximationsalgorithmus.\qed
+		\subsubsection{}
+	\section{}
+\end{document}
