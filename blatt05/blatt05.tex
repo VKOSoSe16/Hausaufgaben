@@ -9,6 +9,9 @@
 \usepackage{../gail}
 \usepackage{../dadp}
 \usepackage{../makrocol}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 \newcommand{\explore}{\texttt{EXPLORE$(\Phi, d)$}\xspace}
 
@@ -30,7 +33,83 @@ Kombinatorischen Optimierung}
 
 \begin{document}
 	\maketitle
-	\section{}
+		\section{}
+	\subsubsection{}
+	Hier eine Zeichnung von T: \\
+\begin{tikzpicture}[auto, node distance=2cm, every loop/.style={},
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+	\node[main node] (1) [] {$t_1$};
+	\node[main node] (2) [right of = 1] {$t_2$};
+	\node[main node] (3) [above right of = 2, yshift = 1cm] {$t_3$};
+	\node[main node] (4) [above right of = 3] {$t_4$};
+	\node[main node] (5) [right of = 4] {$t_5$};
+	\node[main node] (6) [below right of = 3] {$t_6$};
+	\node[main node] (7) [below right of = 2, yshift = -1cm] {$t_7$};
+	\node[main node] (8) [above right of = 7] {$t_8$};
+	\node[main node] (9) [below right of = 7] {$t_9$};
+
+	\path[every node/.style={font=\sffamily\small}]
+    	(1) edge (2)
+    	(2) edge (3)
+    		edge (7)
+    	(3) edge (4)
+    		edge (6)
+    	(4) edge (5)
+    	(7) edge (8)
+    		edge (9);
+\end{tikzpicture}	
+	
+	\hspace*{3cm} Hier die zugehörigen $V_{t_1} \dots V_{t_k}$ : 
+	\begin{tabular}{|c||c|} \hline
+	i & $V_{t_i}$ \\ \hline \hline
+	1 & $\{ v_{1} , v_{2}  , v_{11} \}$ \\ \hline
+	2 & $\{ v_{2} , v_{7}  , v_{11} \}$ \\ \hline
+	3 & $\{ v_{2} , v_{5}  , v_{7}  \}$ \\ \hline
+	4 & $\{ v_{2} , v_{3}  , v_{5}  \}$ \\ \hline
+	5 & $\{ v_{3} , v_{4}  , v_{5}  \}$ \\ \hline
+	6 & $\{ v_{5} , v_{6}  , v_{7}  \}$ \\ \hline
+	7 & $\{ v_{7} , v_{9}  , v_{11} \}$ \\ \hline
+	8 & $\{ v_{7} , v_{8}  , v_{9}  \}$ \\ \hline
+	9 & $\{ v_{9} , v_{10} , v_{11} \}$ \\ \hline
+	\end{tabular}
+	
+	\subsubsection{}
+	Wir wollen zu Beginn die folgende Aussage treffen und beweisen: \\
+	In jedem triangulierten Kreisgraphen gibt es mindestens zwei Knoten vom Grad 2. \n
+	
+	Beweis:
+	Der kleinste triangulierte Kreisgraph ist ein Dreieck und in diesem sind alle drei Knoten vom Grad 2. \\
+	Angenommen wir haben einen Kreisgraphen mit $n$ Knoten, wobei $n \geq 4$ ist. Dann kann man diesen Kreisgraphen teilen indem man eine Kante von einem beliebigen Knoten des Kreisgraphen zu einem beliebigen anderen Knoten des Kreisgraphen hinzufügt, wobei der zweite Knoten kein direkter Nachbar des ersten Knotens sein darf. Man erhält auf diese Weise immer 2 Kreisgraphen. Führt man das Prozedere rekursiv mit den beiden gebildeten Kreisgraphen durch, dann wird man schlussendlich nur noch Kreise mit 3 Knoten haben, also Dreiecke. Da ursprünglich ein Kreisgraph vorhanden war und dieser am Ende mit Dreiecken gefüllt ist, bekommen wir auf diese Art einen triangulierten Kreisgraphen. Da wir den ursprünglichen Kreisgraphen mit der ersten Kante in 2 Kreisgraphen geteilt haben und der kleinste Kreis ein Kreis mit 3 Knoten ist (Dreieck) erhalten wir beim Terminieren mindestens 2 Dreiecke, die außen liegen und da sie außen liegen haben sie einen Knoten, der den Grad 2 haben muss. 
+	
+	
+\begin{algorithm}
+\caption{Baumzerlegung für triangulierte Kreisgraphen}
+\begin{algorithmic}[1]
+\Procedure{Initialisierung}{}
+\State Suche einen Knoten u mit Grad 2
+\State Suche die beiden Nachbarn v, w dieses Knotens
+\State Füge $\{u,v,w\}$ als $V_{t_i}$ zu $V_t$ und einen neuen Knoten $t_i$ zu T hinzu.
+\State REKURSION(u, v, w)
+\EndProcedure
+\Procedure{Rekursion}{u,v,w}
+\State Suche einen Knoten x, der zu v und w adjazent ist und der nicht u ist.
+\If{Es exisiert ein x}
+\State Füge $\{v,w,x\}$ als $V_{t_i}$ zu $V_t$ und einen neuen Knoten $t_i$ zu T hinzu.
+\State Füge eine Kante $\{ t_i , t_j \}$ zu T hinzu, wobei t$_i$ der Knoten in T ist, der zum Dreieck zwischen u,v,w gehört und $t_j$ der Knoten in T ist, der zum Dreieck zwischen v,w,x gehört.
+\State REKURSION(v,w,x)
+\State REKURSION(w,v,x)
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+Dieser Algorithmus liefert das korrekte Ergebnis, weil er nach obiger Aussage auf jeden Fall einen Knoten zum initialisieren findet und rekursiv den triangulierten Kreisgraphen 
+abarbeitet, sodass er letztlich eine Baumzerlegung für den gesamten triangulierten Kreisgraphen findet. Er geht dazu von einem beliebigen Startknoten aus und betrachtet deren Nachbarn, fügt das so gefundere Dreieck als ersten Knoten in T ein und die drei Knoten entsprechend zu $V_T$ hinzu. Damit ist die Initialisierung abgeschlossen. \\
+Jetzt folgt ein rekursiver Teil, der zu bisher betrachteten Kanten jeweils guckt, ob diese Teil eines noch nicht betrachteten Dreiecks sind. Findet man so ein Dreieck hat dieses dann ebenfalls zwei neue noch nicht betrachtete Kanten für die man jeweils rekursiv weiterarbeitet. Damit man keine Rückschritte macht, wird immer ein Knoten u übergeben, der derjenige Knoten ist, zu dem wir das Dreieck mit der aktuell betrachteten Kante schon kennen. Immer wenn wir ein neues Dreieck finden, fügen wir einen Knoten zu T hinzu und die drei Knoten entsprechend zu $V_T$ hinzu. Außerem nutzen wir das u, um darüber auf das Dreieck zu schließen, von dem wir in den aktuellen rekursiven Aufruf gekommen sind und ziehen in T eine Kante zwischen dem entsprechenden Knoten zu diesem Dreieck und zwischen dem entsprechenden Knoten zum neu gefundenen Dreieck.
+Da der Eingabegraph endlich ist und wir keine Rückschritte machen terminiert der Algorithmus auch.
+
 	\section{}
 	\subsubsection{}
 	% TODO Hier restliche Aufgabe einfügen!
