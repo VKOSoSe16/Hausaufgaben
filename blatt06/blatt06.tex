@@ -62,5 +62,27 @@ Kombinatorischen Optimierung}
 				\EndProcedure
 			\end{algorithmic}
 		\end{breakablealgorithm}
+		\subsubsection*{Laufzeitbeweis}
+		Der Algorithmus soll die Laufzeitschranke von $\Ovon{n\cdot\log{n}}$ nicht überschreiten, was zu beweisen gilt:\n
+		Eine Menge in eine Liste zu konvertieren ist bei der Erzeugung einer verketteten Liste in linearer Laufzeit möglich.\\
+		Die Liste wird nun mittels \textsc{MergeSort} sortiert. Die worst-case-Laufzeit von \textsc{MergeSort} liegt dabei in $\Ovon{n\cdot\log{n}}$.\\
+		Die Schleife (Zeile 6 bis 11) wird genau $n$ mal ausgeführt. Alle Operationen in der Schleife lassen sich in konstanter Zeit bewerkstelligen, sofern man die Menge genügend schlau implementiert (z.B. als verkettete Liste).\n
+		Somit liegt die Gesamtlaufzeit auch in $\Ovon{n\cdot\log{n}}$.\qed
+		\subsubsection*{Korrektheitsbeweis}
+		Zunächst sei das triviale ausgesprochen: Da $A$ aufsteigend sortiert ist gilt die Ungleichung $a_i<a_{i+1}$, es gibt zudem kein Element doppelt (deswegen auch keine $\leq$-Relation).\n
+		Der Algorithmus überspringt zudem alle Elemente die größer als die Schranke $B$ sind. Da diese auch nicht in $L^*$ auftauchen können (weil $L^*\leq B$ gilt), braucht man diese auch nicht gesondert zu betrachten. Relevant wird es ab dem Element $a_k\leq B$ mit $1\leq k\leq n$. Gibt es kein $k$ für das die Ungleichung gilt (sprich sind alle Elemente größer als $B$), so ist $S=L^*=0$.\n
+		Für die Hauptschleife (Zeile 6 bis 11) gibt es eine Schleifeninvariante: \textit{Ist $T+a_i>B$, so wird $a_i$ nicht aufgenommen. Findet sich kein $a_j$ mit $0\leq j\leq i$, für das $T+a_j\leq B$ gilt, so ist $T\geq \frac{L^*}{2}$}. Lässt sich also kein $j$ finden ist der Algorithmus entweder zu Ende oder hat ein genügend genaues Ergebnis geliefert für das gilt $T\geq \frac{L^*}{2}$. Daraus folgt, dass der angegebene Algorithmus ein 2-Approximationsalgorithmus ist.
+		\subsubsection*{Beweis der Invariante mittels Widerspruch für \textit{nicht} beendeten Algorithmus}
+		\vspace{-1.5\baselineskip}
+		~\begin{note}
+			Lässt sich ein $a_j$ finden ist nichts zu zeigen. Es wird also nur die Situation betrachtet in der sich kein $a_j$ finden lässt und in der der Algorithmus noch nicht zu Ende ist (also wenn $j\neq1$). Der aktuelle Laufindex der Schleife ist dabei $i$.
+		\end{note}
+		Angenommen es lässt sich kein $a_j$ finden, dann ist $T<\frac{L^*}{2}$.\\
+		Da sich kein $a_j$ finden lässt gilt $T+a_j>B$ für jedes $a_j$ mit $1\leq j< i$. Für diese gilt dadurch $a_j>B-T\geq L^*-T>\frac{L^*}{2}$, was direkt aus $T+a_j>B$ und $T<\frac{L^*}{2}$ folgt. Somit gilt auch, dass jedes $a_k<\frac{L^*}{2}$ mit $i\leq k\leq n$ ist, da sich die bisherige Summe $T$ aus mindestens einem $a_k$ zusammensetzt. Es muss also $a_j>a_k$ gelten.\n
+		Die Liste aller Zahlen $A$ ist jedoch aufsteigend sortiert, wodurch $a_j>a_k$ einen Widerspruch darstellt. Daraus folgt, dass $T\geq \frac{L^*}{2}$ gelten muss wenn sich kein $a_j$ finden lässt.\n
+		Es fehlt nun noch der Beweis für $T\geq\frac{L^*}{2}$ wenn der Algorithmus zu Ende gekommen ist.
+		\subsubsection*{Beweis von $T\geq\frac{L^*}{2}$ für beendeten Algorithmus}
+		Man kann zwei Fälle unterscheiden: Entweder das letzte Element $a_1$ wurde aufgenommen oder nicht aufgenommen. Wurde es nicht aufgenommen, so folgt aus obigem Beweis, dass $T\geq \frac{L^*}{2}$ gilt und es ist nichts zu zeigen.\n
+		Wenn $a_1$ aufgenommen wurde, $\dots$
 	\section{}
 \end{document}
