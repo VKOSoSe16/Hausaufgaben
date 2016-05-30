@@ -88,54 +88,48 @@ Kombinatorischen Optimierung}
 	\section{}
 	
 	Hier das Beispiel aus den Vorlesungsfolien, das wir noch genau betrachten werden: \n
-	
 	"`$m$ Maschinen, $n = 2m + 1$ Jobs. Je zwei Jobs der Längen $m, m + 1, m + 2, \dots , 2m - 1$ und zusätzlich ein weiterer Job der Länge $m$."' \n
-	
 	Anhand dieses Beispiels sollen wir nun erläutern, dass $\frac{3}{4}$ der bestmögliche konstante Gütegarantiefaktor für Greedy-Balance mit LIF-Regel ist. \n
-	
 	Wir wollen dazu die folgenden Dinge tun:
 	\begin{itemize}
 	\item zeigen, wie Greedy-Balance mit LIF-Regel mit Eingaben nach Form des oben angegebenen Beispiels umgeht,
 	\item das Resultat des Algorithmus in Abhängigkeit von $m$ ermitteln und
 	\item diese Approximation mit dem theoretischen bestmöglichen Ergebnis in Bezug setzen.
 	\end{itemize}
-	
 	Wendet man Greedy-Balance mit LIF-Regel auf das Beispiel an, so wird dieses nach einem festen Schema abgearbeitet. Zuerst werden zwei Maschinen die zwei größten Jobs mit den Längen $2m -1$ zugeordnet, dann zwei weiteren Maschinen die nächstgrößeren Jobs mit den Längen $2m - 2$ zugeordnet etc., bis nach $m$ Zuordnungen jeder Maschine ein Job zugeordnet wurde. Da die Jobs der Längen nach absteigend behandelt wurden, werden die Maschinen jetzt in umgekehrter Reihenfolge abgearbeitet. Nach $2m - 2$ Schritten bleiben für die ersten beiden Maschinen noch zwei Jobs der Länge $m$ übrig. Schlussendlich wird der ersten Maschine noch der eine zusätzliche Job der Länge $m$ zugeordnet. \n
-	
 	Zur Verdeutlichung hier noch mal als Tabelle:
 	\begin{multicols}{2}
-	Für gerade m: \n
-\begin{tabular}{|c||c|c|c|} \hline
-Maschine	&	1. Job 	&	2. Job	&	3. Job	\\ \hline \hline
-1			&	$2m-1$	&	$m$		&	$m$		\\ \hline
-2			&	$2m-1$	&	$m$		&	---		\\ \hline
-3			&	$2m-2$	&	$m+1$	&	---		\\ \hline
-\dots		&	\dots	&	\dots	&	\dots	\\ \hline
-m			&	$\frac{3}{2}m$ 	&	$\frac{3}{2}m-1$ 	&	---	\\ \hline
-\end{tabular}
-
-Für ungerade m: \n
-	\begin{tabular}{|c||c|c|c|} \hline
-Maschine	&	1. Job 	&	2. Job	&	3. Job	\\ \hline \hline
-1			&	$2m-1$	&	$m$		&	$m$		\\ \hline
-2			&	$2m-1$	&	$m$		&	---		\\ \hline
-3			&	$2m-2$	&	$m+1$	&	---		\\ \hline
-\dots		&	\dots	&	\dots	&	\dots	\\ \hline
-m			&	$\lfloor \frac{3}{2}m \rfloor$	&	$\lfloor \frac{3}{2}m \rfloor$	&	---	\\ \hline
-\end{tabular}
+		Für gerade m: \n
+		\begin{tabular}{|c||c|c|c|} \hline
+			Maschine	&	1. Job 	&	2. Job	&	3. Job	\\ \hline \hline
+			1			&	$2m-1$	&	$m$		&	$m$		\\ \hline
+			2			&	$2m-1$	&	$m$		&	---		\\ \hline
+			3			&	$2m-2$	&	$m+1$	&	---		\\ \hline
+			\dots		&	\dots	&	\dots	&	\dots	\\ \hline
+			m			&	$\frac{3}{2}m$ 	&	$\frac{3}{2}m-1$ 	&	---	\\ \hline
+		\end{tabular}
+		
+		Für ungerade m: \n
+		\begin{tabular}{|c||c|c|c|} \hline
+			Maschine	&	1. Job 	&	2. Job	&	3. Job	\\ \hline \hline
+			1			&	$2m-1$	&	$m$		&	$m$		\\ \hline
+			2			&	$2m-1$	&	$m$		&	---		\\ \hline
+			3			&	$2m-2$	&	$m+1$	&	---		\\ \hline
+			\dots		&	\dots	&	\dots	&	\dots	\\ \hline
+			m			&	$\lfloor \frac{3}{2}m \rfloor$	&	$\lfloor \frac{3}{2}m \rfloor$	&	---	\\ \hline
+		\end{tabular}
 	\end{multicols}
-
-Jetzt sind mehrere Dinge leicht zu sehen:
-\begin{itemize}
-\item Die vom Algorithmus für das Beispiel gelieferte Gesamtlänge ist immer gleich, sie steht nämlich in der ersten Zeile, welche sich immer aus dem größten Zeitwert $2m-1$ und dem kleinsten Zeitwert $m$, sowie dem einen zusätzlichen m zusammensetzt. Damit liegt das Ergebnis immer bei $4m-1$.
-
-\item Die Summe der Längen aller zu verteilenden Jobs kann man darstellen, indem man sie so aufschlüsselt, wie sie vom Algorithmus auf die Maschinen verteilt werden. Man erhält dann $m \cdot ((2m-(1 + x)) + (m + x)) + m = m \cdot 3m-1 + m = m \cdot 3m$.
-
-\item Die beste vorstellbare Verteilung dieser Gesamtlänge auf die $m$ Maschinen wäre eine Gleichverteilung von $3m$ pro Maschine. In diesem Fall läge das Verhältnis von Approximation zu optimalem Ergebnis bei $\frac{4m -1}{3m}$. 
-
-\item Ohne zu wissen, ob so eine Gleichverteilung möglich ist, liegt die Lösung zu unserem Beispiel auch immer unter dieser Schranke, denn falls es diese Gleichverteilung nicht gibt, muss die optimale Lösung größer als $3m$ sein, womit die Differenz aus Approximation und optimaler Lösung noch kleiner wäre und somit sicher auch unter $\frac{4}{3}$ liegen würde.
-
-\item Für $m \rightarrow \infty$ ergibt sich dann $\lim\limits_{m \rightarrow \infty} = \frac{4}{3}$. D.h. für dieses Beispiel liegt die Approximation schon um den Faktor $\frac{4}{3}$ vom optimalen Ergebnis entfernt, weshalb es auch keinen besseren konstanten Gütegarantiefaktor geben kann.
-
-\end{itemize}
+	Jetzt sind mehrere Dinge leicht zu sehen:
+	\begin{itemize}
+		\item Die vom Algorithmus für das Beispiel gelieferte Gesamtlänge ist immer gleich, sie steht nämlich in der ersten Zeile, welche sich immer aus dem größten Zeitwert $2m-1$ und dem kleinsten Zeitwert $m$, sowie dem einen zusätzlichen m zusammensetzt. Damit liegt das Ergebnis immer bei $4m-1$.
+		
+		\item Die Summe der Längen aller zu verteilenden Jobs kann man darstellen, indem man sie so aufschlüsselt, wie sie vom Algorithmus auf die Maschinen verteilt werden. Man erhält dann $m \cdot ((2m-(1 + x)) + (m + x)) + m = m \cdot 3m-1 + m = m \cdot 3m$.
+		
+		\item Die beste vorstellbare Verteilung dieser Gesamtlänge auf die $m$ Maschinen wäre eine Gleichverteilung von $3m$ pro Maschine. In diesem Fall läge das Verhältnis von Approximation zu optimalem Ergebnis bei $\frac{4m -1}{3m}$. 
+		
+		\item Ohne zu wissen, ob so eine Gleichverteilung möglich ist, liegt die Lösung zu unserem Beispiel auch immer unter dieser Schranke, denn falls es diese Gleichverteilung nicht gibt, muss die optimale Lösung größer als $3m$ sein, womit die Differenz aus Approximation und optimaler Lösung noch kleiner wäre und somit sicher auch unter $\frac{4}{3}$ liegen würde.
+		
+		\item Für $m \rightarrow \infty$ ergibt sich dann $\lim\limits_{m \rightarrow \infty} = \frac{4}{3}$. D.h. für dieses Beispiel liegt die Approximation schon um den Faktor $\frac{4}{3}$ vom optimalen Ergebnis entfernt, weshalb es auch keinen besseren konstanten Gütegarantiefaktor geben kann.
+	
+	\end{itemize}
 \end{document}
