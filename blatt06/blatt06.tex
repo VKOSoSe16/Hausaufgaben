@@ -71,21 +71,19 @@ Kombinatorischen Optimierung}
 		Die Schleife (Zeile 6 bis 11) wird genau $n$ mal ausgeführt. Alle Operationen in der Schleife lassen sich in konstanter Zeit bewerkstelligen, sofern man die Menge genügend schlau implementiert (z.B. als verkettete Liste).\n
 		Somit liegt die Gesamtlaufzeit auch in $\Ovon{n\cdot\log{n}}$.\qed
 		\subsubsection*{Korrektheitsbeweis}
-		Zunächst sei das triviale ausgesprochen: Da $A$ aufsteigend sortiert ist gilt die Ungleichung $a_i<a_{i+1}$, es gibt zudem kein Element doppelt (deswegen auch keine $\leq$-Relation).\n
-		Der Algorithmus überspringt zudem alle Elemente die größer als die Schranke $B$ sind. Da diese auch nicht in $L^*$ auftauchen können (weil $L^*\leq B$ gilt), braucht man diese auch nicht gesondert zu betrachten. Relevant wird es ab dem Element $a_k\leq B$ mit $1\leq k\leq n$. Gibt es kein $k$ für das die Ungleichung gilt (sprich sind alle Elemente größer als $B$), so ist $S=L^*=0$.\n
-		Für die Hauptschleife (Zeile 6 bis 11) gibt es eine Schleifeninvariante: \textit{Ist $T+a_i>B$, so wird $a_i$ nicht aufgenommen. Findet sich kein $a_j$ mit $0\leq j\leq i$, für das $T+a_j\leq B$ gilt, so ist $T\geq \frac{L^*}{2}$}. Lässt sich also kein $j$ finden ist der Algorithmus entweder zu Ende oder hat ein genügend genaues Ergebnis geliefert für das gilt $T\geq \frac{L^*}{2}$. Daraus folgt, dass der angegebene Algorithmus ein 2-Approximationsalgorithmus ist.
-		\subsubsection*{Beweis der Invariante mittels Widerspruch für \textit{nicht} beendeten Algorithmus}
-		\vspace{-1.5\baselineskip}
-		~\begin{note}
-			Lässt sich ein $a_j$ finden ist nichts zu zeigen. Es wird also nur die Situation betrachtet in der sich kein $a_j$ finden lässt und in der der Algorithmus noch nicht zu Ende ist (also wenn $j\neq1$). Der aktuelle Laufindex der Schleife ist dabei $i$.
-		\end{note}
-		Angenommen es lässt sich kein $a_j$ finden, dann ist $T<\frac{L^*}{2}$.\\
-		Da sich kein $a_j$ finden lässt gilt $T+a_j>B$ für jedes $a_j$ mit $1\leq j< i$. Für diese gilt dadurch $a_j>B-T\geq L^*-T>\frac{L^*}{2}$, was direkt aus $T+a_j>B$ und $T<\frac{L^*}{2}$ folgt. Somit gilt auch, dass jedes $a_k<\frac{L^*}{2}$ mit $i\leq k\leq n$ ist, da sich die bisherige Summe $T$ aus mindestens einem $a_k$ zusammensetzt. Es muss also $a_j>a_k$ gelten.\n
-		Die Liste aller Zahlen $A$ ist jedoch aufsteigend sortiert, wodurch $a_j>a_k$ einen Widerspruch darstellt. Daraus folgt, dass $T\geq \frac{L^*}{2}$ gelten muss wenn sich kein $a_j$ finden lässt.\n
-		Es fehlt nun noch der Beweis für $T\geq\frac{L^*}{2}$ wenn der Algorithmus zu Ende gekommen ist.
-		\subsubsection*{Beweis von $T\geq\frac{L^*}{2}$ für beendeten Algorithmus}
-		Man kann zwei Fälle unterscheiden: Entweder das letzte Element $a_1$ wurde aufgenommen oder nicht aufgenommen. Wurde es nicht aufgenommen, so folgt aus obigem Beweis, dass $T\geq \frac{L^*}{2}$ gilt und es ist nichts zu zeigen.\n
-		Wenn $a_1$ aufgenommen wurde, $\dots$
+		Zunächst kann man allgemein sagen, dass $a_i>a_{i+1}$ mit $1\leq i\leq n$ gilt und das alle Elemente übersprungen werden für die $a_i>B$ gilt.\n
+		Man kann nun zwischen zwei Fällen unterscheiden: Entweder es gibt Elemente $a_i$ für die gilt $a_i>\frac{B}{2}$ mit $1\leq i\leq n$ oder es gibt sie nicht.
+		\paragraph{(a)}
+		Für den Fall, dass es solche Elemente gibt, nehmen wir eines der Elemente auf und es gilt sofort $T\geq\frac{B}{2}$.
+		\paragraph{(b)}
+		Für den Fall, dass es solche Elemente nicht gibt und für alle Elemente $a_i$ mit $1\leq i\leq n$ die Ungleichung $a_i\leq\frac{B}{2}$ gilt, kann man wieder zwei Fälle unterscheiden: Entweder es wurden alle Elemente aufgenommen und es gilt $T=L^*$ oder eben nicht.
+		\paragraph{(b.a)}
+		Für den Fall, dass alle Elemente aufgenommen wurden und somit $T=L^*$ gilt, haben wir direkt $L^*$ als Ergebnis und wir brauchen nichts mehr zeigen, weil es das Optimum ist.
+		\paragraph{(b.b)}
+		Für den Fall $T\neq L^*$, so gibt es ein $a_i$ mit $1\leq i\leq n$, welches nicht aufgenommen wurde (weil sonst Fall b.a gelten würde). Es gilt trotzdem $T>\frac{B}{2}$.\\
+		Da $a_i\leq\frac{B}{2}$ ist (Fall b) muss $T\leq B-a_i\leq\frac{B}{2}$ gelten.\n
+		Damit gilt $T\geq \frac{B}{2}$ in jedem Fall für den angegebenen Algorithmus.\qed
+		
 		
 	\section{}
 	
@@ -93,16 +91,16 @@ Kombinatorischen Optimierung}
 	
 	"`$m$ Maschinen, $n = 2m + 1$ Jobs. Je zwei Jobs der Längen $m, m + 1, m + 2, \dots , 2m - 1$ und zusätzlich ein weiterer Job der Länge $m$."' \n
 	
-	Anhand dieses Beispiels sollen wir nun erläutern, dass $\frac{3}{4}$ der bestmögliche Konstante Gütegarantiefaktor für Greedy-Balance mit LIF-Regel ist. \n
+	Anhand dieses Beispiels sollen wir nun erläutern, dass $\frac{3}{4}$ der bestmögliche konstante Gütegarantiefaktor für Greedy-Balance mit LIF-Regel ist. \n
 	
 	Wir wollen dazu die folgenden Dinge tun:
 	\begin{itemize}
 	\item zeigen, wie Greedy-Balance mit LIF-Regel mit Eingaben nach Form des oben angegebenen Beispiels umgeht,
-	\item erläutern, warum dieses Beispiel tatsächlich ein Grenzfall ist und warum alle anderen Eingaben deshalb nicht schlechter approximiert werden und im Zuge dessen
-	\item dass Verschiebungen am Beispiel die Gültigkeit des Gütegarantiefaktors nicht beeinträchtigen.
+	\item das Resultat des Algorithmus in Abhängigkeit von $m$ ermitteln und
+	\item diese Approximation mit dem theoretischen bestmöglichen Ergebnis in Bezug setzen.
 	\end{itemize}
 	
-	Wendet man Greedy-Balance mit LIF-Regel auf das Beispiel an, so wird dieses nach einem festen Schema abgearbeitet. Zuerst werden zwei Maschinen die zwei größten Jobs mit den Längen $2m -1$ zugeordnet, dann zwei weiteren Maschinen die nächstgrößeren Jobs mit den Längen $2m - 2$ usw. bis nach m Zuordnungen jeder Maschine ein Job zugeordnet wurde. Da die Längen der Jobs absteigend behandelt wurden, werden die Maschinen jetzt in umgekehrter Reihenfolge abgearbeitet. Nach $2m - 2$ Schritten bleiben für die ersten beiden Maschinen noch zwei Jobs der Länge $m$ übrig. Schlussendlich wird der ersten Maschine noch der eine zusätzliche Job der Länge $m$ zugeordnet. \n
+	Wendet man Greedy-Balance mit LIF-Regel auf das Beispiel an, so wird dieses nach einem festen Schema abgearbeitet. Zuerst werden zwei Maschinen die zwei größten Jobs mit den Längen $2m -1$ zugeordnet, dann zwei weiteren Maschinen die nächstgrößeren Jobs mit den Längen $2m - 2$ zugeordnet etc., bis nach $m$ Zuordnungen jeder Maschine ein Job zugeordnet wurde. Da die Jobs der Längen nach absteigend behandelt wurden, werden die Maschinen jetzt in umgekehrter Reihenfolge abgearbeitet. Nach $2m - 2$ Schritten bleiben für die ersten beiden Maschinen noch zwei Jobs der Länge $m$ übrig. Schlussendlich wird der ersten Maschine noch der eine zusätzliche Job der Länge $m$ zugeordnet. \n
 	
 	Zur Verdeutlichung hier noch mal als Tabelle:
 	\begin{multicols}{2}
@@ -133,11 +131,11 @@ Jetzt sind mehrere Dinge leicht zu sehen:
 
 \item Die Summe der Längen aller zu verteilenden Jobs kann man darstellen, indem man sie so aufschlüsselt, wie sie vom Algorithmus auf die Maschinen verteilt werden. Man erhält dann $m \cdot ((2m-(1 + x)) + (m + x)) + m = m \cdot 3m-1 + m = m \cdot 3m$.
 
-\item Die beste vorstellbare Verteilung dieser Gesamtlänge auf die $m$ Maschinen wäre eine Gleichverteilung von $3m$ pro Maschine. In diesem Fall läge das Verhältnis von Approximation zu optimalem Ergebnis bei $\frac{4m -1}{3m} < \frac{4}{3}$. 
+\item Die beste vorstellbare Verteilung dieser Gesamtlänge auf die $m$ Maschinen wäre eine Gleichverteilung von $3m$ pro Maschine. In diesem Fall läge das Verhältnis von Approximation zu optimalem Ergebnis bei $\frac{4m -1}{3m}$. 
 
-\item Ohne zu wissen, ob so eine Gleichverteilung möglich ist, liegt die Lösung zu unserem Beispiel auch immer unter dieser Schranke, denn falls es diese Gleichverteilung nicht gibt, muss die optimale Lösung größer als $3m$ sein, womit die Differenz aus Approximation und optimaler Lösung noch kleiner wäre und somit sicher auch unter $\frac{4}{3}$ liegen muss. Das gilt insbesondere auch für alle Beispiele, in denen die zu verteilende Gesamtlänge nicht genau durch $m$ teilbar ist.
+\item Ohne zu wissen, ob so eine Gleichverteilung möglich ist, liegt die Lösung zu unserem Beispiel auch immer unter dieser Schranke, denn falls es diese Gleichverteilung nicht gibt, muss die optimale Lösung größer als $3m$ sein, womit die Differenz aus Approximation und optimaler Lösung noch kleiner wäre und somit sicher auch unter $\frac{4}{3}$ liegen würde.
+
+\item Für $m \rightarrow \infty$ ergibt sich dann $\lim\limits_{m \rightarrow \infty} = \frac{4}{3}$. D.h. für dieses Beispiel liegt die Approximation schon um den Faktor $\frac{4}{3}$ vom optimalen Ergebnis entfernt, weshalb es auch keinen besseren konstanten Gütegarantiefaktor geben kann.
+
 \end{itemize}
-
-	Rotation durch das Beispiel
-	
 \end{document}
