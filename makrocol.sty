@@ -35,6 +35,25 @@
 \usepackage{xcolor}
 \usepackage{colortbl}
 
+
+
+% << ------<<=====>>------ >>
+% Simple makros
+% << ------<<=====>>------ >>
+\newcommand{\hcap}[1]{{\normalfont\textsc{#1}}}
+
+\newcommand{\n}{\vspace{5pt}\\}
+\newcommand{\qed}{\\\hspace*{\fill}$\square$}
+\newcommand{\limn}{\lim\limits_{n\to\infty}} % normal limes with n -> unendl.
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+
+
+% << ------<<=====>>------ >>
+% Note environment
+% << ------<<=====>>------ >>
 \newenvironment{note}
 {
 	\\\hfill
@@ -54,4 +73,54 @@
 	\\
 }
 
-\newcommand{\hcap}[1]{{\normalfont\textsc{#1}}}
+
+
+% << ------<<=====>>------ >>
+% Pseudocode environment and additional keywords
+% << ------<<=====>>------ >>
+\newcommand{\Break}{\State\textbf{break}}
+\newcommand{\Null}{\textbf{null}}
+\newcommand{\Nil}{\textbf{nil}}
+
+\newenvironment{pseudocode}[2]
+{
+	\alglanguage{pseudocode}
+	\begin{breakablealgorithm}
+		\caption{#1}
+		\begin{algorithmic}[1]
+			\Procedure{#1}{#2}
+}
+{
+			\EndProcedure
+		\end{algorithmic}
+	\end{breakablealgorithm}
+}
+
+
+
+% << ------<<=====>>------ >>
+% Floating code environment
+% << ------<<=====>>------ >>
+% thanks to Stackoverflow for the breakablealgorithm environment :D
+\makeatletter
+\newenvironment{breakablealgorithm}
+{
+	\begin{center}
+		\refstepcounter{algorithm}% New algorithm
+		\hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+		\renewcommand{\caption}[2][\relax]{% Make a new \caption
+		{
+			\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+			\ifx\relax##1\relax % #1 is \relax
+				\addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+			\else % #1 is not \relax
+				\addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+			\fi
+			\kern2pt\hrule\kern2pt
+		}
+}
+{
+	\kern2pt\hrule\relax
+	\end{center}
+}
+\makeatother

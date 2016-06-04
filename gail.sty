@@ -64,11 +64,9 @@
 \usepackage{fancyhdr}
 \usepackage{color}
 \usepackage{hyperref}
+\usepackage{makrocol}
 
 \usepackage[left=3cm,right=2.5cm,top=3.5cm,bottom=3cm]{geometry}
-
-% Break State for the algorithm package
-\newcommand{\Break}{\State\textbf{break}}
 
 
 
@@ -410,52 +408,6 @@
 %\setcounter{section}{\thesheetnumber}
 %\setcounter{subsection}{0}
 %\titleformat{\subsection}{\large\bfseries}{}{0pt}{Aufgabe \thesubsection\quad}
-
-
-
-% << ------<<=====>>------ >>
-% Useful commands
-% << ------<<=====>>------ >>
-\newcommand{\n}{\vspace{5pt}\\}
-\newcommand{\qed}{\\\hspace*{\fill}$\square$}
-\newcommand{\limn}{\lim\limits_{n\to\infty}} % normaler limes mit n -> unendl.
-
-
-
-% << ------<<=====>>------ >>
-% Floating code environment
-% << ------<<=====>>------ >>
-% thanks to Stackoverflow for the breakablealgorithm environment :D
-\makeatletter
-\newenvironment{breakablealgorithm}
-{
-	\begin{center}
-		\refstepcounter{algorithm}% New algorithm
-		\hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
-		\renewcommand{\caption}[2][\relax]{% Make a new \caption
-		{
-			\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
-			\ifx\relax##1\relax % #1 is \relax
-				\addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
-			\else % #1 is not \relax
-				\addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
-			\fi
-			\kern2pt\hrule\kern2pt
-		}
-}
-{
-	\kern2pt\hrule\relax
-	\end{center}
-}
-\makeatother
-
-
-
-% << ------<<=====>>------ >>
-% For Gauss-braces
-% << ------<<=====>>------ >>
-\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 
 
