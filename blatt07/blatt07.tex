@@ -38,19 +38,41 @@ Kombinatorischen Optimierung}
 \begin{document}
 	\maketitle
 	\section{}
+%		\begin{pseudocode}{ApproxWightedHittingSet}{$A, B$}
+%%			\State $r$ := 0
+%			\State $H$ := $\emptyset$
+%			\ForAll{$A_i\in A$}
+%				\State $E$ := sortToList($A_i$)
+%				\State $n_{min}$ := $\infty$
+%				\State $h$ := \Null
+%				\ForAll{$e_j\in E$}
+%					\State $n$ := amountOfHits($e_j$)
+%					\If{$n<n_{min}$}
+%						\State $n_{min} \gets n$
+%						\State $h\gets e_j$
+%					\EndIf
+%				\EndFor
+%				\State $H \gets H\cup \{h\}$
+%				\State $A\gets A\setminus\text{allSetsHitBy(h)}$
+%			\EndFor
+%		\end{pseudocode}
 		\begin{pseudocode}{ApproxWightedHittingSet}{$A, B$}
-			\State r := 0
-			\ForAll{$A_i\in A$}
-				\State $E$ := sortToList($A_i$)
-				\State $n_{min}$ := $\infty$
-				\State $h$ := \Null
-				\ForAll{$e_j\in E$}
-					\State $n$ := amountOfHits($e_j$)
-					\If{$n<n_{min}$}
-						\State $n_{min} \leftarrow n$
-					\EndIf
-				\EndFor
+			\State $R$ := relation from $element \rightarrow quality ~index$
+			\ForAll{$a_i\in A$}
+				\State $n$ := amountOfAppearances($a_i$)
+				\State $quality$ := $weight(a_i) / n$
+				\State addToRelation($R$, $a_i\rightarrow quality$)
+			\EndFor
+			\ForAll{$a_i \in R$ \textbf{with} $R(a_k)\leq R(a_{k+1})$ \textbf{and} $B \neq \emptyset$}
+				\State $H\gets H\cup \{a_i\}$
+				\State $B\gets B\setminus\{$allSetsHitBy$(a_i)\}$
 			\EndFor
 		\end{pseudocode}
+		\subsubsection*{Beschreibung}
+		$R$ ist eine Relation, die jedes $a_i\in A$ auf einen Qualitätsindex abbildet.
+		Dieser Index ist einfach das Gewicht $\frac{weight(a_i)}{n}$, wobei $weight(a_i)$ das Gewicht von $a_i$ ist und $n$ die Anzahl der Vorkommen angibt.\n
+		Die zweite \texttt{for}-Schleife (Zeile 8-11) geht alle $a_i$ durch, wobei bei dem $a_i$ mit den geringsten Gewicht begonnen wird, sodass $R(a_k)\leq R(a_{k+1})$ gilt.
+		Zudem bricht die Schleife ab, sobald kein $B_j\in B$ mehr existiert ($A$ muss dabei nicht leer sein), sprich sobald $B=\emptyset$ gilt.\n
+		In der Schleife wird nun jedes $a_i$ in $H$ aufgenommen und jedes getroffene $B_j$ aus $B$ entfernt, sodass man keine Elemente doppelt aufgenommen werden, die evtl. gar keine neuen $B_j$ treffen.
 	\section{}
 \end{document}
