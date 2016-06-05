@@ -5,6 +5,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{nicefrac}
+\usepackage{nameref}
 
 \usepackage{gail}
 \usepackage{dadp}
@@ -16,8 +17,6 @@
 %\usepackage{gail}
 %\usepackage{dadp}
 %\usepackage{makrocol}
-
-\usepackage{multicol}
 
 \setfirstauthor{Walter Stieben}
 \setfirstauthorID{4stieben@inf}
@@ -38,52 +37,49 @@ Kombinatorischen Optimierung}
 \begin{document}
 	\maketitle
 	\section{}
-%		\begin{pseudocode}{ApproxWightedHittingSet}{$A, B$}
-%%			\State $r$ := 0
-%			\State $H$ := $\emptyset$
-%			\ForAll{$A_i\in A$}
-%				\State $E$ := sortToList($A_i$)
-%				\State $n_{min}$ := $\infty$
-%				\State $h$ := \Null
-%				\ForAll{$e_j\in E$}
-%					\State $n$ := amountOfHits($e_j$)
-%					\If{$n<n_{min}$}
-%						\State $n_{min} \gets n$
-%						\State $h\gets e_j$
-%					\EndIf
-%				\EndFor
-%				\State $H \gets H\cup \{h\}$
-%				\State $A\gets A\setminus\text{allSetsHitBy(h)}$
-%			\EndFor
-%		\end{pseudocode}
 		\begin{pseudocode}{ApproxWightedHittingSet}{$A, B$}
-			\State $R$ := relation from $element \rightarrow quality ~index$
-			\ForAll{$a_i\in A$}
-				\State $n$ := amountOfAppearances($a_i$)
-				\State $quality$ := $weight(a_i) / n$
-				\State addToRelation($R$, $a_i\rightarrow quality$)
-			\EndFor
-			\ForAll{$a_i \in R$ \textbf{with} $R(a_k)\leq R(a_{k+1})$ \textbf{and} $B \neq \emptyset$}
-				\State $H\gets H\cup \{a_i\}$
-				\State $B\gets B\setminus\{$allSetsHitBy$(a_i)\}$
-			\EndFor
+			\Procedure{ApproxWightedHittingSet}{$A, B$}
+				\While{$B\neq \emptyset$}
+					\State $a$ := \Null \hfill // the element with the best quality
+					\State $q_{min}:=\infty$
+					\ForAll{$a_i\in A$}
+						\State $n := \text{amountOfAppearances}(a_i)$
+						\State $quality$ := $weight(a_i) / n$
+						\If{$quality<q_{min}$}
+							\State $q_{min}\gets quality$
+							\State $a\gets a_i$
+						\EndIf
+					\EndFor
+					\State $H\gets H\cup \{a\}$
+					\State $B\gets B\setminus\text{allSetsHitBy}(a)$
+					\State $A\gets A\setminus a$
+				\EndWhile
+			\EndProcedure
 		\end{pseudocode}
 		\subsubsection*{Beschreibung}
-		$R$ ist eine Relation, die jedes $a_i\in A$ auf einen Qualitätsindex abbildet.
-		Dieser Index ist einfach das Gewicht $\frac{weight(a_i)}{n}$, wobei $weight(a_i)$ das Gewicht von $a_i$ ist und $n$ die Anzahl der Vorkommen angibt.\n
-		Die zweite \texttt{for}-Schleife (Zeile 8-11) geht alle $a_i$ durch, wobei bei dem $a_i$ mit den geringsten Gewicht begonnen wird, sodass $R(a_k)\leq R(a_{k+1})$ gilt.
-		Zudem bricht die Schleife ab, sobald kein $B_j\in B$ mehr existiert ($A$ muss dabei nicht leer sein), sprich sobald $B=\emptyset$ gilt.\n
-		In der Schleife wird nun jedes $a_i$ in $H$ aufgenommen und jedes getroffene $B_j$ aus $B$ entfernt, sodass man keine Elemente doppelt aufgenommen werden, die evtl. gar keine neuen $B_j$ treffen.
+		Zu Beginn jedes Schleifendurchgangs (Zeile 3-15) wird das Element aus $A$ bestimmt, welches die beste Qualität hat.
+		Die Qualität beschreibt wie viel Gewicht pro getroffenem $B_j\in B$ aufgenommen wird.
+		Je weniger Gewicht aufgenommen wird, desto besser das Resultat. Dadurch hat ein kleinerer Wert eine höhere (bessere) Qualität.\n
+		Bestimmt wird das Element $a$ mit der besten Qualität in Zeile 5-12 in der alle verbleibenden $a_i\in A$ durchgegangen werden.
+		Die Funktion \texttt{amountOfAppearances} berechnet dabei die Anzahl der getroffenen Mengen $B_j\in B$ durch das übergebene Element $a_i$.\n
+		Am Ende (Zeile 13-15) wird das gefundene Optimum für diesen Durchlauf ($a$) in das Hitting Set $H$ aufgenommen.
+		Zudem wird aus $B$ jede Menge entfernt, die durch $a$ getroffen wurde.
+		Auch wird $a$ aus $A$ entfernt, sodass nun ein neues Optimum berechnet werden kann.
+		\subsubsection*{Terminierung}
+		Der angegebene Algorithmus terminiert, da in jedem $B_i\in B$ nur Elemente aus $A$ vorkommen. Da im worst-case jedes $A$ einmal die beste Qualität hat, wird jedes $B_i$ getroffen. Elemente mit gleicher Qualität werden nacheinander behandelt, sodass es auch dort keine Terminierungsprobleme geben kann.
 		\subsubsection*{Laufzeitanalyse}
-		Die beiden Schleifen durchlaufen maximal $|A|$ viele Elemente.\\
-		Der Schleifenrumpf der ersten Schleife enthält die Funktion \texttt{amountOfAppearances}, der die Anzahl der Vorkommen des übergebenen $a_i$ bestimmt. Eine Brude-Force Implementation würde jedes $B_i\in B$ durchgehen in prüfen ob das $a_i$ darin vorkommt.
-		Es gibt potentiell $|B|\cdot |A|$ viele Elemente, die man untersuchen muss, daher ist die Laufzeit in $\Ovon{|B|\cdot |A|}$.\\
-		Die Berechnung der Qualität und das einfügen in die Relation ist nicht zwangsläufig von der Eingabegröße Abhängig, daher kann man das mit einer Laufzeit in $\Ovon{1}$ implementieren.\n
-		Die zweite Schleife fügt zunächst ein $a_i$ der Menge $H$ hinzu. Implementiert man $H$ als verkettete Liste geht das in $\Ovon{1}$.\\
-		Als nächstes wird die \texttt{allSetsHitBy} Funktion benutzt, welcher alle Mengen sucht in denen $a_i$ vorkommt.
-		Die Funktionsweise ist identisch mit der von \texttt{amountOfAppearances}, nur wird eine Menge von Mengen zurückgegeben, statt einer Zahl.
-		Somit ist die Laufzeit von \texttt{allSetsHitBy} in $\Ovon{|B|\cdot |A|}$.\n
-		Insgesamt hat man also die Laufzeit von $\Ovon{|A|\cdot (|B|\cdot |A|) + |A|\cdot (|B|\cdot |A|)}=\Ovon{2\cdot |B|\cdot |A|^2}=\Ovon{|B|\cdot |A|^2}$, was polynomiell in der Eingabe ist.
+		Auch wenn die Bedingung der \texttt{while}-Schleife $B\neq\emptyset$ lautet, so wird diese maximal $|A|$ mal ausgeführt, da bei jedem Durchlauf $A$ um ein Element verkleinert wird.
+		Ist $A=\emptyset$, so ist auch $B=\emptyset$ (s. Abschnitt Terminierung oben).\n
+		Die innere \texttt{for}-Schleife wird ebenfalls $|A|$ mal ausgeführt.
+		In ihr wird \texttt{amountOfAppearances} aufgerufen, was die Anzahl der ''Hits'' ausgibt.
+		Dabei wird in einer intuitiven Implementation jede Menge in $B$ in jedes Element in dieser Menge durchgegangen.
+		Jede Menge in $B$ kann dabei maximal $|A|$ viele Elemente beherbergen, wodurch sich eine Laufzeit ergibt, die in $\Ovon{|B|\cdot |A|}$ ist.
+		Alle anderen Schritte haben eine konstante Laufzeit.\n
+		Am Ende (Zeile 13-15) wird $a$ in $H$ aufgenommen, was in konstanter Zeit machbar ist und $a$ aus $A$ gelöscht, was in linearer Zeit machbar ist (sofern man bei beiden von einer verketteten Liste ausgeht).\\
+		Die Funktion \texttt{allSetsHitBy}, welche Aufgerufen wird funktioniert in einer intuitiven Implementation genauso wie \texttt{amountOfAppearances}, nur wird hier ein anderes Ergebnis zurückgegeben. 
+		Die Laufzeit von \texttt{allSetsHitBy} ist somit ebenfalls in $\Ovon{|B|\cdot |A|}$.\n
+		Insgesamt ergibt sich also eine in der Eingabe polynomielle Laufzeit in \[\Ovon{|A|\cdot (|A|\cdot (|B|\cdot |A|) + (|B|\cdot |A|))}=\Ovon{|A|^3\cdot |B|+|A|^2\cdot |B|}.\]
+		
 		\subsubsection*{Beweis: \texttt{ApproxWightedHittingSet} ist ein $b$-Approximationsalgorithmus}
 		
 	\section{}
