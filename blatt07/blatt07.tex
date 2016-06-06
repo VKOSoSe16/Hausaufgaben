@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{nicefrac}
 \usepackage{nameref}
+\usepackage{enumerate}
 
 \usepackage{gail}
 \usepackage{dadp}
@@ -66,7 +67,7 @@ Kombinatorischen Optimierung}
 		Zudem wird aus $B$ jede Menge entfernt, die durch $a$ getroffen wurde.
 		Auch wird $a$ aus $A$ entfernt, sodass nun ein neues Optimum berechnet werden kann.
 		\subsubsection*{Terminierung}
-		Der angegebene Algorithmus terminiert, da in jedem $B_i\in B$ nur Elemente aus $A$ vorkommen. Da im worst-case jedes $A$ einmal die beste Qualität hat, wird jedes $B_i$ getroffen. Elemente mit gleicher Qualität werden nacheinander behandelt, sodass es auch dort keine Terminierungsprobleme geben kann.
+		Der angegebene Algorithmus terminiert, da in jedem $B_i\in B$ nur Elemente aus $A$ vorkommen. Da im worst-case jedes $a_i\in A$ einmal die beste Qualität hat, wird jedes $B_i$ getroffen. Elemente mit gleicher Qualität werden nacheinander behandelt, sodass es auch dort keine Terminierungsprobleme geben kann.
 		\subsubsection*{Laufzeitanalyse}
 		Auch wenn die Bedingung der \texttt{while}-Schleife $B\neq\emptyset$ lautet, so wird diese maximal $|A|$ mal ausgeführt, da bei jedem Durchlauf $A$ um ein Element verkleinert wird.
 		Ist $A=\emptyset$, so ist auch $B=\emptyset$ (s. Abschnitt Terminierung oben).\n
@@ -76,11 +77,58 @@ Kombinatorischen Optimierung}
 		Jede Menge in $B$ kann dabei maximal $|A|$ viele Elemente beherbergen, wodurch sich eine Laufzeit ergibt, die in $\Ovon{|B|\cdot |A|}$ ist.
 		Alle anderen Schritte haben eine konstante Laufzeit.\n
 		Am Ende (Zeile 13-15) wird $a$ in $H$ aufgenommen, was in konstanter Zeit machbar ist und $a$ aus $A$ gelöscht, was in linearer Zeit machbar ist (sofern man bei beiden von einer verketteten Liste ausgeht).\\
-		Die Funktion \texttt{allSetsHitBy}, welche Aufgerufen wird funktioniert in einer intuitiven Implementation genauso wie \texttt{amountOfAppearances}, nur wird hier ein anderes Ergebnis zurückgegeben. 
+		Die Funktion \texttt{allSetsHitBy}, welche aufgerufen wird funktioniert in einer intuitiven Implementation genauso wie \texttt{amountOfAppearances}, nur wird hier ein anderes Ergebnis zurückgegeben. 
 		Die Laufzeit von \texttt{allSetsHitBy} ist somit ebenfalls in $\Ovon{|B|\cdot |A|}$.\n
 		Insgesamt ergibt sich also eine in der Eingabe polynomielle Laufzeit in \[\Ovon{|A|\cdot (|A|\cdot (|B|\cdot |A|) + (|B|\cdot |A|))}=\Ovon{|A|^3\cdot |B|+|A|^2\cdot |B|}.\]
 		
 		\subsubsection*{Beweis: \texttt{ApproxWightedHittingSet} ist ein $b$-Approximationsalgorithmus}
+		\texttt{ApproxWightedHittingSet} ist ein $b$-Approximationsalgorithmus. Trivial. \hfill ;-) \qed
 		
 	\section{}
+\begin{enumerate}[a.)]
+\item Lösung mit Dynamic Programming 1: \\
+
+\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c|}
+\hline 
+4 & 0 & 2 & 2 & 3 & 3 & 3 & 5 & 7 & 7 & \underline{\textbf{8}} \\ 
+\hline 
+3 & 0 & 2 & 2 & 3 & 3 & 3 & 5 & 7 & 7 & \underline{\textbf{8}} \\ 
+\hline 
+2 & 0 & 0 & 1 & 1 & 1 & 1 & 5 & 5 & \underline{\textbf{6}} & 6 \\ 
+\hline 
+1 & 0 & 0 & 0 & 0 & 0 & 0 & \underline{\textbf{5}} & 5 & 5 & 5 \\ 
+\hline 
+0 & \underline{\textbf{0}} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+\hline \hline
+  & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ 
+\hline 
+\end{tabular} 
+
+Es werden die Items 1,2 und 3 genommen, die zusammen das Gewicht 9 und den Wert 8 haben.
+
+	
+\item Lösung mit Dynamic Programming 2: \\
+
+\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline 
+4 & 0 & 1 & 1 & 3 & 6 & 6 & 8 & 8 & \underline{\textbf{8}} & 13 & 13 & 13 \\ 
+\hline 
+3 & 0 & 1 & 1 & 3 & 8 & 8 & 8 & 8 & \underline{\textbf{8}} & $\infty$ & $\infty$ & $\infty$ \\ 
+\hline 
+2 & 0 & 2 & 7 & 7 & 7 & 7 & \underline{\textbf{7}} & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ \\ 
+\hline 
+1 & 0 & 6 & 6 & 6 & 6 & \underline{\textbf{6}} & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ \\ 
+\hline 
+0 & \underline{\textbf{0}} & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ \\ 
+\hline \hline
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\ 
+\hline 
+\end{tabular} 
+
+
+Es werden wieder die Items 1,2 und 3 genommen, die zusammen das Gewicht 9 und den Wert 8 haben. Die Einträge mit dem Gewicht 13 müssen hier ausgelassen werden, da $ 13 > 9 = W$.
+
+\end{enumerate}
+
+
 \end{document}
