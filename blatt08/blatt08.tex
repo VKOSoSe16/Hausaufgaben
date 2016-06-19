@@ -37,5 +37,10 @@ Kombinatorischen Optimierung}
 \begin{document}
 	\maketitle
 	\section{}
+		Zunächst sei bemerkt, dass $c(T)\leq c(H^*)$ gilt.\n
+		Beweis: $T$ ist ein \textit{minimaler} Spannungsbaum, man kann also keine Kanten weg lassen und trotzdem einen zusammenhängenden Graphen haben. Es kann jedoch sein, dass Kanten aus $M$ besser sind, somit gilt $c(T)<c(H^*)$. Wenn $T$ aus zwei Knoten besteht gilt sogar $c(T)=c(H^*)$. Es gilt also $c(T)\leq c(H^*)$.\n
+		Durch die Hinzunahme von $M$ gilt für $T^+$ sie Aussage $c(T^+)\leq c(H^*)+\frac{1}{2}\cdot c(H^*)=\frac{3}{2}\cdot c(H^*)$.
+		Da durch die Bildung der Euler-Tour $L$ nicht auf das Gewicht geachtet wird, gilt die Aussage auch für $H$.\n
+		Es gilt also $c(H)\leq \frac{3}{2}\cdot c(H^*)$.\qed
 	\section{}
 \end{document}
