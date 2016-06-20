@@ -40,7 +40,7 @@ Kombinatorischen Optimierung}
 		Zunächst sei bemerkt, dass $c(T)\leq c(H^*)$ gilt, alle Kanten in $T$ haben weniger oder gleich viele Kosten wie die aus $H^*$.\n
 		Beweis: $T$ ist ein \textit{minimaler} Spannungsbaum, man kann also keine Kanten weg lassen und trotzdem einen zusammenhängenden Graphen haben, somit ist $c(T)\not> c(H^*)$.\\
 		Sind Kanten aus $M$ besser und werden hinzugenommen, gilt $c(T^+)<c(H^*)$.
-		Wenn $T$ nur aus zwei Knoten $u$ und $v$ besteht gilt sogar $c(T)=c(T^+)=c(H^*)$, da durch das Matching $M$ keine Kanten dazukommen und keine alternativen Pfade entstehen.\\
+		Wenn $T$ nur aus zwei Knoten $u$ und $v$ besteht gilt sogar $c(T^+)=c(H^*)$, da durch das Matching $M$ keine Kanten dazukommen und keine alternativen Pfade entstehen.\\
 		Es gilt also $c(T^+)\leq c(H^*)$.\n
 		Durch die Hinzunahme von $M$ gilt für $T^+$ die Aussage $c(T^+)\leq c(H^*)+\frac{1}{2}\cdot c(H^*)=\frac{3}{2}\cdot c(H^*)$, da es sein kann, dass alle Kanten aus $T^+$ in $H^*$ enthalten sind.
 		Bei der Bildung der Euler-Tour $L$ wird nicht auf das Gewicht geachtet, somit gilt die Aussage auch für $H$.\n
