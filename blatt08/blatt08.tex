@@ -47,4 +47,24 @@ Kombinatorischen Optimierung}
 		\[c(T^+)=c(H)=c(T)+c(M)\leq c(H^*)+\frac{1}{2}\cdot c(H^*)=\frac{3}{2}\cdot c(H^*)\]
 		Insgesamt gilt also $c(H)\leq \frac{3}{2}\cdot c(H^*)$.\qed
 	\section{}
+		\begin{pseudocode}{Approx--3D--Matching}{$T,M$}
+			\Repeat
+				\State Nehme erstes Tripel $t\in T$ in $M$ auf
+				\For{alle $t_i\in T$}
+					\If{$t\cap t_i\neq\emptyset$}
+						\State lösche $t$ aus $T$
+					\EndIf
+				\EndFor
+			\Until{$T=\emptyset$}
+		\end{pseudocode}
+		Um zu zeigen, dass für das mit diesem Algorithmus gefundene $M$ die Ungleichung $|M|\geq\frac{1}{3}\cdot |M^*|$ gilt machen wir folgende Annahme:\n
+		Wir betrachten 4 Tripel aus $T$ und nehmen an, dass 3 dieser Tripel Elemente von $M^*$ sind.
+		Wir nehmen weiterhin an, dass das übrig gebliebene Tripel jeweils ein Element mit jedem der 3 Tripel aus $M^*$ gemeinsam hat.\\
+		Nehmen wir nun das Tripel in $M$ auf, das nicht in $M^*$ ist, so streichen wir genau die 3 Tripel, die Element $M^*$ sind von der optimalen Lösung.
+		Selbst wenn es mehrere optimale Lösungen gibt (also mehrere $M^*$ mit gleichen Betrag), streichen wir aus jeder dieser optimalen Lösungen genau 3.\n
+		Wir können offensichtlich nur maximal 3 Tripel jeder beliebigen optimalen Lösung $M^*$ streichen, da die 3 Elemente aus unserem schlecht gewählten Tripel maximal in 3 unterschiedlichen Tripeln von $M^*$ vorkommen können.
+		Das liegt daran, dass sich die Tripel aus $M^*$ nicht überschneiden dürfen, da es sonst keine gültige Lösung wäre und somit kann ein Element unseres schlecht gewählten Tripels immer nur genau in einem Tripel aus $M^*$ Vorkommen.
+		Wenn wir für unsere Annahme nun $|M|$ und $|M^*|$ vergleichen, dann haben wir in $M$ ein Tripel und in $M^*$ 3 Tripel. Demnach ist $|M|= \frac{1}{3}\cdot |M^*|$ und wir sind noch in der Grenze.\n
+		Der beschriebene Fall ist offensichtlich der worst-case, denn wenn unser gewähltes Tripel nur 2 Tripel aus $M^*$ schneidet, erhalten wir $|M|=1$, $|M^*|=2$ und somit $|M|=\frac{1}{2}\cdot |M^*|$, womit wir noch in der Grenze ist. Schneidet Das Schlecht gewählte Tripel nur ein Element aus $M^*$, muss das gewählte Tripel in einer anderen optimalen Lösung $M_{2}^*$ sein, da man die 2 Tripel offensichtlich austauschen kann. Allerdings würde dieser Fall der Annahme widersprechen.\n
+		Somit findet unser Algorithmus immer Mengen $M$, für die gilt $|M|\geq \frac{1}{3}|M^*|$.
 \end{document}
