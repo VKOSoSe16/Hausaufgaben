@@ -39,11 +39,12 @@ Kombinatorischen Optimierung}
 	\section{}
 		Zunächst sei bemerkt, dass $c(T)\leq c(H^*)$ gilt, alle Kanten in $T$ haben weniger oder gleich viele Kosten wie die aus $H^*$.\n
 		Beweis: $T$ ist ein \textit{minimaler} Spannbaum, man kann also keine Kanten weglassen und trotzdem einen zusammenhängenden Graphen haben und die vorhandenen Kanten sind diejenigen mit minimalem Gewicht womit $c(T)\not> c(H^*)$ gilt.\\
-		Sind Kanten aus $M$ besser und werden hinzugenommen, gilt $c(T^+)<c(H^*)$.
-		Wenn $T$ nur aus zwei Knoten $u$ und $v$ besteht gilt sogar $c(T)=c(T^+)=c(H^*)$, da durch das Matching $M$ keine Kanten dazukommen und keine alternativen Pfade entstehen.\\
-		Es gilt also $c(T^+)\leq c(H^*)$.\n
-		Durch die Hinzunahme von $M$ gilt für $T^+$ die Aussage $c(T^+)\leq c(H^*)+\frac{1}{2}\cdot c(H^*)=\frac{3}{2}\cdot c(H^*)$, da es sein kann, dass alle Kanten aus $T^+$ in $H^*$ enthalten sind.
-		Bei der Bildung der Euler-Tour $L$ wird nicht auf das Gewicht geachtet, somit gilt die Aussage auch für $H$.\n
+		Vor dem Bilden von $T^+$ gilt für $T$ die Ungleichung $c(T)<c(H^*)$.
+		Da $T$ ein Baum ist und keinen Zyklus bildet, enthält $T$ keine Tour für das $\Delta$--TSP, somit kann $c(T)=c(H^*)$ nie gelten und es gilt $c(T)<c(H^*)$.\\
+		Durch die Hinzunahme von $M$ gibt es einen Zyklus für das $\Delta$--TSP, somit ist $c(T^+)=c(H^*)$, zudem ist $c(T^+)=c(H)=c(T)+c(M)$.
+		aus $(*)$ wissen wir, dass $c(M)\leq \frac{1}{2}\cdot c(H^*)$ gilt.
+		Da alle Kanten aus $T^+$ in $H^*$ enthalten sind gilt für $T^+$:
+		\[c(T^+)=c(H)=c(T)+c(M)\leq c(H^*)+\frac{1}{2}\cdot c(H^*)=\frac{3}{2}\cdot c(H^*)\]
 		Insgesamt gilt also $c(H)\leq \frac{3}{2}\cdot c(H^*)$.\qed
 	\section{}
 \end{document}
