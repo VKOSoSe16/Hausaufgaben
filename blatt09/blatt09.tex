@@ -1,0 +1,204 @@
+\documentclass[a4paper]{article}
+\usepackage[ngerman]{babel}  
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{nameref}
+
+\usepackage{gail}
+\usepackage{dadp}
+\usepackage{makrocol}
+
+\usepackage{tikz}
+
+% Wenn das installieren in /usr/share/texlive/texmf-dist/tex/generic/hauke96/ schief ging, dann einfach
+% sh getpackages.sh locally 
+% ausführen. Das aber NUR wenn es wirklich nicht geht
+%\usepackage{gail}
+%\usepackage{dadp}
+%\usepackage{makrocol}
+
+\setfirstauthor{Walter Stieben}
+\setfirstauthorID{4stieben@inf}
+\setsecondauthor{Tim Reipschläger}
+\setsecondauthorID{4reipsch@inf}
+\setthirdauthor{Louis Kobras}
+\setthirdauthorID{4kobras@inf}
+\setfourthauthor{Hauke Stieler}
+\setfourthauthorID{4stieler@inf}
+\settitle{Lösungsstrategien für NP-schwere Probleme der
+Kombinatorischen Optimierung}
+\setsheetnumber{9}
+\setstartdate{2016}{06}{20}
+\setdatefreq{7}
+\setinterruptions{2}
+\setsectionstyletasksalphnum{}
+
+\begin{document}
+	\maketitle
+	\section{}
+	
+	
+	\section{}
+	\begin{minipage}[t]{.48\textwidth}
+		\begin{center}
+			\begin{tikzpicture}
+				\node at (0,0)	{$A$};
+				\node at (2,0)	{$B$};
+				\node at (1,5)	{Schnitt: 7};
+				
+				\node (d) at (0,1) {d};
+				\node (c) at (0,2) {c};
+				\node (b) at (0,3) {b};
+				\node (a) at (0,4) {a};
+				
+				\node (h) at (2,1) {h};
+				\node (g) at (2,2) {g};
+				\node (f) at (2,3) {f};
+				\node (e) at (2,4) {e};
+				
+				\draw
+					(a) -- (e)
+					(a) -- (f)
+					(b) -- (f)
+					(b) -- (g)
+					(c) -- (e)
+					(c) -- (f)
+					(d) -- (g)
+					(g) -- (h)
+				;
+			\end{tikzpicture}
+		\end{center}
+	\end{minipage}
+	\begin{minipage}[t]{.48\textwidth}
+		\begin{center}
+			\begin{tabular}{c|cccc}
+						&	e(2)	&	f(3)	&	g(1)	&	h(-1)	\\\hline
+				a(2)	&	2	&	3	&	3	&	1	\\
+				b(2)	&	\underline{4}	&	3	&	1	&	1\\
+				c(2)	&	2	&	3	&	3	&	1	\\
+				d(1)	&	3	&	4	&	0	&	0	
+			\end{tabular}	
+		\end{center}
+	\end{minipage}\\
+	\begin{minipage}[t]{.48\textwidth}
+		\begin{center}
+			\begin{tikzpicture}
+				\node at (0,0)	{$A$};
+				\node at (2,0)	{$B$};
+				\node at (1,5)	{Schnitt: 3};
+				
+				\node (d) at (0,1) {d};
+				\node (c) at (0,2) {c};
+				\node (e) at (0,3) {e};
+				\node (a) at (0,4) {a};
+				
+				\node (h) at (2,1) {h};
+				\node (g) at (2,2) {g};
+				\node (f) at (2,3) {f};
+				\node (b) at (2,4) {b};
+				
+				\draw
+					(a) -- (e)
+					(a) -- (f)
+					(b) -- (f)
+					(b) edge [bend left] (g)
+					(c) -- (e)
+					(c) -- (f)
+					(d) -- (g)
+					(g) -- (h)
+				;
+			\end{tikzpicture}
+		\end{center}
+	\end{minipage}
+	\begin{minipage}[t]{.48\textwidth}
+		\begin{center}
+			\begin{tabular}{c|cccc}
+						&	f(1)	&	g(-1)	&	h(-1)	\\\hline
+				a(0)	&	-1	&	-1	&	-1	\\
+				c(-2)	&	-3	&	-3	&	-3	\\
+				d(1)	&	\underline{2}	&	-2	&	0	
+			\end{tabular}	
+		\end{center}
+	\end{minipage}\\
+	\begin{minipage}[t]{.48\textwidth}
+		\begin{center}
+			\begin{tikzpicture}
+				\node at (0,0)	{$A$};
+				\node at (2,0)	{$B$};
+				\node at (1,5)	{Schnitt: 1};
+				
+				\node (f) at (0,1) {f};
+				\node (c) at (0,2) {c};
+				\node (e) at (0,3) {e};
+				\node (a) at (0,4) {a};
+				
+				\node (h) at (2,1) {h};
+				\node (g) at (2,2) {g};
+				\node (d) at (2,3) {d};
+				\node (b) at (2,4) {b};
+				
+				\draw
+					(a) -- (e)
+					(a) edge [bend right] (f)
+					(b) -- (f)
+					(b) edge [bend left] (g)
+					(c) -- (e)
+					(c) -- (f)
+					(d) -- (g)
+					(g) -- (h)
+				;
+			\end{tikzpicture}
+		\end{center}
+	\end{minipage}
+	\begin{minipage}[t]{.48\textwidth}
+		\begin{center}
+			\begin{tabular}{c|cccc}
+						&	g(-3)	&	h(-1)	\\\hline
+				a(-2)	&	-5	&	\underline{-3}	\\
+				c(-2)	&	-5	&	-3	
+			\end{tabular}	
+		\end{center}
+	\end{minipage}\\
+	\begin{minipage}[t]{.48\textwidth}
+		\begin{center}
+			\begin{tikzpicture}
+				\node at (0,0)	{$A$};
+				\node at (2,0)	{$B$};
+				\node at (1,5)	{Schnitt: 1};
+				
+				\node (f) at (0,1) {f};
+				\node (c) at (0,2) {c};
+				\node (e) at (0,3) {e};
+				\node (h) at (0,4) {h};
+				
+				\node (a) at (2,1) {a};
+				\node (g) at (2,2) {g};
+				\node (d) at (2,3) {d};
+				\node (b) at (2,4) {b};
+				
+				\draw
+					(a) -- (e)
+					(a) -- (f)
+					(b) -- (f)
+					(b) edge [bend left] (g)
+					(c) -- (e)
+					(c) -- (f)
+					(d) -- (g)
+					(g) -- (h)
+				;
+			\end{tikzpicture}
+		\end{center}
+	\end{minipage}
+	\begin{minipage}[t]{.48\textwidth}
+		\begin{center}
+			\begin{tabular}{c|cccc}
+							&	g(-1)	\\\hline
+					c(0)	&	-1
+			\end{tabular}	
+		\end{center}
+	\end{minipage}\\
+	Optimaler Schnitt: A \{a, e, c, f\}; B \{b, d, g, h\}
+\end{document}
