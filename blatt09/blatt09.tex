@@ -39,9 +39,6 @@ Kombinatorischen Optimierung}
 \begin{document}
 	\maketitle
 	\section{}
-	
-	
-	\section{}
 	\begin{minipage}[t]{.48\textwidth}
 		\begin{center}
 			\begin{tikzpicture}
@@ -92,13 +89,13 @@ Kombinatorischen Optimierung}
 				
 				\node (d) at (0,1) {d};
 				\node (c) at (0,2) {c};
-				\node (e) at (0,3) {e};
+				\node[draw,circle] (e) at (0,3) {e};
 				\node (a) at (0,4) {a};
 				
 				\node (h) at (2,1) {h};
 				\node (g) at (2,2) {g};
 				\node (f) at (2,3) {f};
-				\node (b) at (2,4) {b};
+				\node[draw,circle] (b) at (2,4) {b};
 				
 				\draw
 					(a) -- (e)
@@ -118,7 +115,7 @@ Kombinatorischen Optimierung}
 			\begin{tabular}{c|cccc}
 						&	f(1)	&	g(-1)	&	h(-1)	\\\hline
 				a(0)	&	-1	&	-1	&	-1	\\
-				c(-2)	&	-3	&	-3	&	-3	\\
+				c(0)	&	-1	&	-1	&	-1	\\
 				d(1)	&	\underline{2}	&	-2	&	0	
 			\end{tabular}	
 		\end{center}
@@ -130,15 +127,15 @@ Kombinatorischen Optimierung}
 				\node at (2,0)	{$B$};
 				\node at (1,5)	{Schnitt: 1};
 				
-				\node (f) at (0,1) {f};
+				\node[draw,circle] (f) at (0,1) {f};
 				\node (c) at (0,2) {c};
-				\node (e) at (0,3) {e};
+				\node[draw,circle] (e) at (0,3) {e};
 				\node (a) at (0,4) {a};
 				
 				\node (h) at (2,1) {h};
 				\node (g) at (2,2) {g};
-				\node (d) at (2,3) {d};
-				\node (b) at (2,4) {b};
+				\node[draw,circle] (d) at (2,3) {d};
+				\node[draw,circle] (b) at (2,4) {b};
 				
 				\draw
 					(a) -- (e)
@@ -169,15 +166,15 @@ Kombinatorischen Optimierung}
 				\node at (2,0)	{$B$};
 				\node at (1,5)	{Schnitt: 1};
 				
-				\node (f) at (0,1) {f};
+				\node[draw,circle] (f) at (0,1) {f};
 				\node (c) at (0,2) {c};
-				\node (e) at (0,3) {e};
-				\node (h) at (0,4) {h};
+				\node[draw,circle] (e) at (0,3) {e};
+				\node[draw,circle] (h) at (0,4) {h};
 				
-				\node (a) at (2,1) {a};
+				\node[draw,circle] (a) at (2,1) {a};
 				\node (g) at (2,2) {g};
-				\node (d) at (2,3) {d};
-				\node (b) at (2,4) {b};
+				\node[draw,circle] (d) at (2,3) {d};
+				\node[draw,circle] (b) at (2,4) {b};
 				
 				\draw
 					(a) -- (e)
@@ -196,7 +193,7 @@ Kombinatorischen Optimierung}
 		\begin{center}
 			\begin{tabular}{c|cccc}
 							&	g(-1)	\\\hline
-					c(0)	&	-1
+					c(-2)	&	-3
 			\end{tabular}	
 		\end{center}
 	\end{minipage}\\
