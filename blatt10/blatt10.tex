@@ -1,0 +1,73 @@
+\documentclass[a4paper]{article}
+\usepackage[ngerman]{babel}  
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{nameref}
+
+\usepackage{gail}
+\usepackage{dadp}
+\usepackage{makrocol}
+
+\usepackage{tikz}
+
+% Wenn das installieren in /usr/share/texlive/texmf-dist/tex/generic/hauke96/ schief ging, dann einfach
+% sh getpackages.sh locally 
+% ausführen. Das aber NUR wenn es wirklich nicht geht
+%\usepackage{gail}
+%\usepackage{dadp}
+%\usepackage{makrocol}
+
+\setfirstauthor{Walter Stieben}
+\setfirstauthorID{4stieben@inf}
+\setsecondauthor{Tim Reipschläger}
+\setsecondauthorID{4reipsch@inf}
+\setthirdauthor{Louis Kobras}
+\setthirdauthorID{4kobras@inf}
+\setfourthauthor{Hauke Stieler}
+\setfourthauthorID{4stieler@inf}
+\settitle{Lösungsstrategien für NP-schwere Probleme der
+Kombinatorischen Optimierung}
+\setsheetnumber{10}
+\setstartdate{2016}{04}{11}
+\setdatefreq{7}
+\setinterruptions{2}
+\setsectionstyletasksalphnum{}
+
+\begin{document}
+	\maketitle
+	\section{}
+	Wir betrachten die folgenden Zufallsvariablen:
+	\begin{itemize}
+	\item $X:$ Die Anzahl der Stimmen für D.
+	\item $X_1:$ Die Anzahl der Stimmen der Wähler von D, die D gewählt haben
+	\item $X_2:$ Die Anzahl der Stimmen der Wähler von R, die D gewählt haben
+	\item $X_3:$ Die Anzahl der Stimmen der Wähler von D, die R gewählt haben
+	\end{itemize}
+Es gilt die folgende Beziehung:
+\[
+	X = X_1 + X_2 - X_3
+\] und damit auch \[
+	E[X] = E[X_1 + X_2 - X_3]
+\]. Aufgrund der linearität des Erwartungswertes können wir dies als Summe
+\[
+	E[X] = E[X_1] + E[X_2] - E[X_3]
+\] schreiben. Wir rechnen nun:
+\begin{align*}
+E[X_1] &= (1-\frac{1}{100}) \cdot 80000 = 79200 \\
+E[X_2] &= \frac{1}{100} \cdot 20000 = 200 \\
+E[X_3] &= \frac{1}{100} \cdot 80000 = 800
+E[X] &= 79200 + 200 - 800 = 78600
+\end{align*}
+Der Erwartungswert von X ist damit 78600.
+
+\section{}
+\begin{enumerate}
+\item Immer dann, wenn wir einen Prozess in S aufnehmen, legen wir gleichzeitig fest, dass alle mit dem gerade aufgenommenen Prozess in Konflikt stehenden Knoten nicht in S aufgenommen werden. Jede einzelne Selektion ist damit Konfliktfrei und damit muss die Auswahl aller Prozesse in S am Ende auch konfliktfrei sein.
+
+\item Nicht bearbeitet.
+\end{enumerate}
+
+\end{document}
